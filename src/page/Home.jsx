@@ -7,8 +7,12 @@ import h2 from '../assets/hero_slider2.png';
 import h3 from '../assets/hero_slider3.png';
 import h4 from '../assets/hero_slider4.jpg';
 import testimonial from '../assets/testimonials.webp';
-import services from '../assets/services.png';
 import about from '../assets/about.jpg';
+import PartnerSlider from '../components/PartnerSlider';
+
+import About from '../components/About';
+import WhyChooseUs from '../components/WhyChooseUs';
+import Services from '../components/Services';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -152,102 +156,11 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Work With Us?</h2>
-            <p className="text-xl text-gray-600">Because we actually know how Amazon thinks.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-8 border-2 border-black hover:bg-black hover:text-white transition group">
-              <div className="text-5xl mb-4">⚡</div>
-              <h3 className="text-xl font-bold mb-3">Full-Stack Amazon Expertise</h3>
-              <p className="text-gray-600 group-hover:text-gray-300">From listings to logistics, we handle everything Amazon.</p>
-            </div>
-            <div className="text-center p-8 border-2 border-black hover:bg-black hover:text-white transition group">
-              <div className="text-5xl mb-4">📊</div>
-              <h3 className="text-xl font-bold mb-3">Data-Driven PPC</h3>
-              <p className="text-gray-600 group-hover:text-gray-300">Results, not reports. We optimize for ROI, not vanity metrics.</p>
-            </div>
-            <div className="text-center p-8 border-2 border-black hover:bg-black hover:text-white transition group">
-              <div className="text-5xl mb-4">🤝</div>
-              <h3 className="text-xl font-bold mb-3">Trusted by 20+ Brands</h3>
-              <p className="text-gray-600 group-hover:text-gray-300">Fast, flexible, and transparent. No fluff, just growth.</p>
-            </div>
-          </div>
-          <div className="text-center mt-10">
-            <button onClick={() => scrollToSection('case-studies')} className="text-lg font-semibold hover:underline">
-              See how we helped others →
-            </button>
-          </div>
-        </div>
-      </section>
+      
+      <WhyChooseUs/>
 
       {/* Services with Image */}
-      <section id="services" className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">What We Do</h2>
-            <p className="text-xl text-gray-600">Simple. Focused. Results that scale your store.</p>
-          </div>
-
-          {/* Services Image Banner */}
-          <div className="mb-12 rounded-lg overflow-hidden">
-            <img 
-              src={services} 
-              alt="Our Services" 
-              className="w-full h-64 md:h-96 object-cover"
-              style={{ filter: 'grayscale(100%)' }}
-            />
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 border-2 border-black">
-              <Package size={40} className="mb-4" />
-              <h3 className="text-2xl font-bold mb-3">Catalog & Content</h3>
-              <p className="text-gray-700 mb-4">We optimize your titles, bullets, and A+ content so your listings convert.</p>
-              <ul className="space-y-2 text-gray-600">
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />SEO-optimized product titles</li>
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />Compelling bullet points</li>
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />Premium A+ content design</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-8 border-2 border-black">
-              <BarChart3 size={40} className="mb-4" />
-              <h3 className="text-2xl font-bold mb-3">Advertising & Account Management</h3>
-              <p className="text-gray-700 mb-4">Lower ACoS, higher ROI – and your account stays healthy.</p>
-              <ul className="space-y-2 text-gray-600">
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />Sponsored Ads optimization</li>
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />Account health monitoring</li>
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />Performance analytics</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-8 border-2 border-black">
-              <Rocket size={40} className="mb-4" />
-              <h3 className="text-2xl font-bold mb-3">Logistics & Fulfillment</h3>
-              <p className="text-gray-700 mb-4">From FBA prep to returns – we help you stay compliant and profitable.</p>
-              <ul className="space-y-2 text-gray-600">
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />FBA prep and shipment</li>
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />Inventory management</li>
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />Returns processing</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-8 border-2 border-black">
-              <Calculator size={40} className="mb-4" />
-              <h3 className="text-2xl font-bold mb-3">Accounting & Taxes</h3>
-              <p className="text-gray-700 mb-4">Tax filing and cross-border compliance made simple.</p>
-              <ul className="space-y-2 text-gray-600">
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />GST and tax filing</li>
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />Cross-border compliance</li>
-                <li className="flex items-start gap-2"><Check size={20} className="flex-shrink-0 mt-1" />Financial reporting</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Services/>
 
       {/* How It Works */}
       <section className="py-20 px-6 bg-white">
@@ -313,77 +226,7 @@ export default function Home() {
       </section>
 
       {/* About with Image */}
-      <section id="about" className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Who We Are</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're a team of eCommerce professionals obsessed with scaling Amazon brands through strategic consulting and FBA expertise.
-            </p>
-          </div>
-
-          {/* About Image Banner */}
-          <div className="mb-12 rounded-lg overflow-hidden">
-            <img 
-              src={about} 
-              alt="Our Team" 
-              className="w-full h-64 md:h-96 object-cover"
-              style={{ filter: 'grayscale(100%)' }}
-            />
-          </div>
-          
-          {/* Founder Spotlight */}
-          <div className="bg-black text-white p-10 mb-12 rounded-lg">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="w-32 h-32 bg-gray-700 rounded-full flex-shrink-0"></div>
-              <div className="text-center md:text-left">
-                <h3 className="text-3xl font-bold mb-2">Rahul Vanzara</h3>
-                <p className="text-xl text-gray-300 mb-4">Founder, Ari Business Network</p>
-                <p className="text-gray-300 leading-relaxed mb-4">
-                  Leading expert in Amazon FBA and global e-commerce expansion. Specializing in brand growth strategies, cross-border selling, IP protection, and tax compliance. Actively shares insights on Amazon selling strategies through Ari Business Network and social media platforms.
-                </p>
-                <div className="flex gap-4 justify-center md:justify-start">
-                  <a href="https://www.instagram.com/aribusinessnetwork/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition">
-                    <Instagram size={24} />
-                  </a>
-                  <a href="https://www.linkedin.com/in/rahulvanzara/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition">
-                    <Linkedin size={24} />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Team Members */}
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="p-8 border-2 border-black hover:bg-gray-50 transition">
-              <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
-              <h3 className="text-xl font-bold mb-2 text-center">Pinki Sharma</h3>
-              <p className="text-gray-600 text-center mb-3">Strategy & Growth</p>
-              <p className="text-sm text-gray-600 text-center">Expert in Amazon growth strategies and brand positioning</p>
-            </div>
-            <div className="p-8 border-2 border-black hover:bg-gray-50 transition">
-              <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
-              <h3 className="text-xl font-bold mb-2 text-center">Riddhi Vanzara</h3>
-              <p className="text-gray-600 text-center mb-3">Seller Success & Operations</p>
-              <p className="text-sm text-gray-600 text-center">Specialized in seller account management and operational excellence</p>
-            </div>
-          </div>
-
-          {/* Credentials */}
-          <div className="mt-12 text-center">
-            <p className="text-gray-600 mb-6">In collaboration with</p>
-            <div className="flex flex-wrap justify-center gap-8 items-center">
-              <div className="px-6 py-3 border-2 border-black rounded">
-                <span className="font-bold">Ari Business Network</span>
-              </div>
-              <div className="px-6 py-3 border-2 border-black rounded">
-                <span className="font-bold">Bombay Ad Cartel</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <About/>
 
       {/* Pricing */}
       <section className="py-20 px-6 bg-gray-50">
