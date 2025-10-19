@@ -20,7 +20,7 @@ export function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <button onClick={() => scrollToSection('home')} className="text-2xl font-bold hover:text-gray-600 transition">
-              MD CONSULTING
+              ARI BUSINESS NETWORK
             </button>
           </div>
 
