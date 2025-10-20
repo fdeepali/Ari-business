@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Menu, X, Phone, Mail, MapPin, Linkedin, Youtube } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import logo from '../assets/logo.jpg';
 
-// Navbar Component for Single Page Website
-export function Navbar() {
+function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const scrollToSection = (id) => {
@@ -19,8 +19,12 @@ export function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <button onClick={() => scrollToSection('home')} className="text-2xl font-bold hover:text-gray-600 transition">
-              MD CONSULTING
+            <button onClick={() => scrollToSection('home')}>
+              <img 
+                src={logo} 
+                alt="Ari Business Network" 
+                className="h-12 w-auto object-contain" 
+              />
             </button>
           </div>
 
@@ -29,25 +33,23 @@ export function Navbar() {
             <button onClick={() => scrollToSection('home')} className="font-medium hover:text-gray-600 transition">
               Home
             </button>
+            <button onClick={() => scrollToSection('about')} className="font-medium hover:text-gray-600 transition">
+              About
+            </button>
             <button onClick={() => scrollToSection('services')} className="font-medium hover:text-gray-600 transition">
               Services
             </button>
             <button onClick={() => scrollToSection('case-studies')} className="font-medium hover:text-gray-600 transition">
               Case Studies
             </button>
-            <button onClick={() => scrollToSection('about')} className="font-medium hover:text-gray-600 transition">
-              About
-            </button>
+            
             <button onClick={() => scrollToSection('contact')} className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition font-semibold">
               Let's Talk
             </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
+          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
@@ -59,14 +61,14 @@ export function Navbar() {
               <button onClick={() => scrollToSection('home')} className="text-left font-medium hover:text-gray-600 transition">
                 Home
               </button>
+              <button onClick={() => scrollToSection('about')} className="font-medium hover:text-gray-600 transition">
+              About
+            </button>
               <button onClick={() => scrollToSection('services')} className="text-left font-medium hover:text-gray-600 transition">
                 Services
               </button>
               <button onClick={() => scrollToSection('case-studies')} className="text-left font-medium hover:text-gray-600 transition">
                 Case Studies
-              </button>
-              <button onClick={() => scrollToSection('about')} className="text-left font-medium hover:text-gray-600 transition">
-                About
               </button>
               <button onClick={() => scrollToSection('contact')} className="bg-black text-white px-6 py-3 rounded font-semibold hover:bg-gray-800 transition">
                 Let's Talk
@@ -78,3 +80,5 @@ export function Navbar() {
     </nav>
   );
 }
+
+export default Navbar;
