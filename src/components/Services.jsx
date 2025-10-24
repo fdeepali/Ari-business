@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import services from '../assets/services.png';
-import { Check, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, ArrowRight, ChevronDown, ChevronUp, Image, FileText, TrendingUp, Package, DollarSign, Award, Shield, Globe, Truck, BarChart3, Users, BookOpen, AlertCircle } from 'lucide-react';
 
-// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
+    transition: { staggerChildren: 0.1 }
   }
 };
 
@@ -19,152 +15,272 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
+    transition: { duration: 0.6, ease: "easeOut" }
   }
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
+  hidden: { opacity: 0, scale: 0.95 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut"
-    }
+    transition: { duration: 0.5 }
   },
   hover: {
     y: -8,
     scale: 1.02,
-    boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
-    transition: {
-      duration: 0.3,
-      ease: "easeOut"
-    }
-  },
-  tap: {
-    scale: 0.98
-  }
-};
-
-const imageVariants = {
-  hidden: { opacity: 0, scale: 1.1 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut"
-    }
-  }
-};
-
-const floatingAnimation = {
-  y: [0, -15, 0],
-  transition: {
-    duration: 4,
-    repeat: Infinity,
-    ease: "easeInOut"
+    boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
+    transition: { duration: 0.3 }
   }
 };
 
 function Services() {
   const [expandedService, setExpandedService] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('all');
 
-  const serviceList = [
-    { 
-      title: "Amazon Onboarding", 
-      description: "Streamlined onboarding process to get your products live on Amazon efficiently.",
-      features: ["Account setup", "Product listing", "Brand registry", "Payment configuration"]
+  const serviceCategories = [
+    {
+      id: 'catalog',
+      name: 'Catalog & Content',
+      icon: FileText,
+      color: 'from-blue-500 to-blue-700',
+      services: [
+        {
+          title: "Imaging",
+          icon: Image,
+          description: "Professional photography that maximizes all 9 image spaces Amazon provides. Strategic visual storytelling that sets you apart from competitors using random photos.",
+          features: [
+            "Utilize all 9 Amazon image slots strategically",
+            "Professional lifestyle photography",
+            "Infographic creation with compelling visuals",
+            "A+ Content imagery optimization"
+          ],
+          highlight: "Unlike competitors, we maximize every visual opportunity Amazon offers"
+        },
+        {
+          title: "Cataloging",
+          icon: Package,
+          description: "Optimize every word space in your listings. Our unique approach enhances product visibility and sales algorithms while reducing advertising costs.",
+          features: [
+            "Strategic keyword placement in all available spaces",
+            "SEO optimization for Amazon's A9 algorithm",
+            "Bullet point optimization for conversions",
+            "Backend search term maximization"
+          ],
+          highlight: "Our cataloging strategy leads to reduced advertising costs and increased profitability"
+        },
+        {
+          title: "Enhanced Brand Content",
+          icon: Award,
+          description: "Create compelling A+ Content reviewed by specialized regional experts. Leverage detailed descriptions and brand stories for comprehensive promotion.",
+          features: [
+            "A+ Content design and implementation",
+            "Brand story development",
+            "Comparison charts and modules",
+            "Regional expert review and optimization"
+          ],
+          highlight: "Meticulous use of every word space for enhanced algorithms and sales performance"
+        }
+      ]
     },
-    { 
-      title: "Imaging", 
-      description: "Professional imaging services to showcase your products in the best light.",
-      features: ["Professional photography", "Lifestyle shots", "Infographic creation", "A+ content imagery"]
+    {
+      id: 'account',
+      name: 'Account & Advertising',
+      icon: TrendingUp,
+      color: 'from-purple-500 to-purple-700',
+      services: [
+        {
+          title: "Account Management",
+          icon: Users,
+          description: "Comprehensive monitoring of Seller Central. Expert placement in relevant categories, proactive notification management, and positive account health.",
+          features: [
+            "Daily Seller Central monitoring",
+            "Accurate category placement",
+            "Performance notification management",
+            "Account health optimization"
+          ],
+          highlight: "Thorough monitoring ensuring optimal account performance at all times"
+        },
+        {
+          title: "Advertising Optimization",
+          icon: BarChart3,
+          description: "Advanced PPC strategies that drive traffic and sales. Uniform optimization across Amazon and social media platforms.",
+          features: [
+            "Advanced PPC campaign management",
+            "Cross-platform optimization",
+            "ROI-focused bidding strategies",
+            "Continuous performance analysis"
+          ],
+          highlight: "Consistent optimization across all platforms for maximum efficiency"
+        },
+        {
+          title: "Seller Reinstatement",
+          icon: Shield,
+          description: "Dedicated legal team to investigate and reinstate suspended accounts with precision and professionalism.",
+          features: [
+            "Professional appeal writing",
+            "Complete documentation preparation",
+            "Direct Amazon communication",
+            "Preventive strategy implementation"
+          ],
+          highlight: "Expert legal team specialized in account recovery"
+        }
+      ]
     },
-    { 
-      title: "Cataloging", 
-      description: "Comprehensive catalog management for organized and appealing product listings.",
-      features: ["Product categorization", "SEO optimization", "Bullet point optimization", "Keyword research"]
+    {
+      id: 'logistics',
+      name: 'Logistics & Fulfillment',
+      icon: Truck,
+      color: 'from-green-500 to-green-700',
+      services: [
+        {
+          title: "FBA Preparation",
+          icon: Package,
+          description: "Streamlined FBA prep ensuring your products meet all Amazon requirements for seamless fulfillment.",
+          features: [
+            "Professional labeling services",
+            "Packaging compliance verification",
+            "Shipment creation and planning",
+            "Inventory prep and inspection"
+          ],
+          highlight: "Complete FBA readiness for smooth operations"
+        },
+        {
+          title: "International Shipping & Returns",
+          icon: Globe,
+          description: "Navigate cross-border logistics and customs with ease. Expert handling of global shipments and returns.",
+          features: [
+            "Global logistics coordination",
+            "Customs clearance assistance",
+            "Return processing and management",
+            "International customer support"
+          ],
+          highlight: "Seamless global operations with expert guidance"
+        },
+        {
+          title: "Excess Inventory Solutions",
+          icon: AlertCircle,
+          description: "Strategic solutions for surplus inventory including relocation, repositioning, and optimized packaging to reduce logistics costs.",
+          features: [
+            "Inventory repositioning strategies",
+            "Packaging optimization",
+            "Cost-effective logistics partnerships",
+            "Complete inventory liquidation plans"
+          ],
+          highlight: "Practical solutions ensuring complete sales and minimized costs"
+        }
+      ]
     },
-    { 
-      title: "Account Management", 
-      description: "Expert account management to navigate Amazon's Seller Central effectively.",
-      features: ["Daily monitoring", "Performance metrics", "Policy compliance", "Growth strategy"]
+    {
+      id: 'finance',
+      name: 'Accounting & Taxes',
+      icon: DollarSign,
+      color: 'from-orange-500 to-orange-700',
+      services: [
+        {
+          title: "Accounting Services",
+          icon: FileText,
+          description: "Accurate bookkeeping, financial reports, and transaction management for both domestic and international operations.",
+          features: [
+            "Complete financial record management",
+            "Payables and receivables tracking",
+            "Financial reporting and analysis",
+            "Multi-currency transaction handling"
+          ],
+          highlight: "Expert chartered accountants managing complex financial operations"
+        },
+        {
+          title: "Tax Compliance",
+          icon: DollarSign,
+          description: "Navigate complex international taxation and foreign exchange. Expert solutions optimizing profitability amid fluctuating rates.",
+          features: [
+            "Domestic and international tax filing",
+            "Sales tax compliance across regions",
+            "Foreign exchange optimization",
+            "Legal formality navigation"
+          ],
+          highlight: "Specialized expertise in international tax complexity and FX management"
+        }
+      ]
     },
-    { 
-      title: "Training", 
-      description: "Tailored training sessions to empower sellers with Amazon marketplace insights.",
-      features: ["One-on-one sessions", "Video tutorials", "Best practices", "Market trends"]
-    },
-    { 
-      title: "Seller Reinstatement", 
-      description: "Specialized support for reinstating suspended Amazon seller accounts.",
-      features: ["Appeal writing", "Document preparation", "Communication with Amazon", "Preventive measures"]
-    },
-    { 
-      title: "Accounting", 
-      description: "Hassle-free accounting services to keep your financials in order.",
-      features: ["Profit tracking", "Expense management", "Tax preparation", "Financial reporting"]
-    },
-    { 
-      title: "Enhanced Brand Content", 
-      description: "Engaging content creation to enhance your brand presence on Amazon.",
-      features: ["A+ Content design", "Brand story", "Comparison charts", "Enhanced images"]
-    },
-    { 
-      title: "Taxes", 
-      description: "Expert guidance on tax-related matters for Amazon sellers.",
-      features: ["Sales tax compliance", "International taxes", "Tax filing", "Deduction optimization"]
-    },
-    { 
-      title: "IP Accelerator", 
-      description: "Accelerate your brand's intellectual property protection on Amazon.",
-      features: ["Trademark filing", "Brand registry", "IP protection", "Legal support"]
-    },
-    { 
-      title: "Excess Inventory", 
-      description: "Strategic solutions for managing excess inventory effectively.",
-      features: ["Liquidation strategies", "Promotional campaigns", "Outlet deals", "Inventory analysis"]
-    },
-    { 
-      title: "Compliance", 
-      description: "Ensure compliance with Amazon's policies and regulations.",
-      features: ["Policy monitoring", "Documentation", "Quality control", "Risk assessment"]
-    },
-    { 
-      title: "FBA Preparation", 
-      description: "Efficient preparation of products for Fulfillment by Amazon (FBA).",
-      features: ["Labeling services", "Packaging guidelines", "Shipment creation", "Inventory prep"]
-    },
-    { 
-      title: "International Shipping & Returns", 
-      description: "Seamless management of international shipping and returns.",
-      features: ["Global logistics", "Customs clearance", "Return processing", "Customer support"]
-    },
-    { 
-      title: "Storage", 
-      description: "Secure and organized storage solutions for your inventory.",
-      features: ["Warehouse management", "Inventory tracking", "Security systems", "Climate control"]
-    },
-    { 
-      title: "Translation", 
-      description: "Expert translation services for expanding your reach to diverse markets.",
-      features: ["Multi-language support", "Cultural adaptation", "Local SEO", "Market-specific content"]
-    },
+    {
+      id: 'support',
+      name: 'Training & Support',
+      icon: BookOpen,
+      color: 'from-red-500 to-red-700',
+      services: [
+        {
+          title: "Seller Training",
+          icon: BookOpen,
+          description: "Comprehensive training programs equipping your team with skills to navigate Amazon's complex ecosystem.",
+          features: [
+            "One-on-one training sessions",
+            "Video tutorial library",
+            "Best practices documentation",
+            "Market trend insights"
+          ],
+          highlight: "Expert guidance helping teams master Amazon operations"
+        },
+        {
+          title: "Dedicated Support",
+          icon: Users,
+          description: "Personalized attention with ongoing expert advice to keep you ahead of industry changes.",
+          features: [
+            "Priority response times",
+            "Dedicated account manager",
+            "Proactive strategy updates",
+            "Industry change notifications"
+          ],
+          highlight: "Personalized support ensuring you never miss important updates"
+        }
+      ]
+    }
   ];
+
+  const pricingTiers = [
+    {
+      name: "Silver",
+      coverage: "50% Services",
+      price: { inr: "9,999", usd: "121" },
+      color: "from-gray-400 to-gray-600",
+      popular: false
+    },
+    {
+      name: "Gold",
+      coverage: "80% Services",
+      price: { inr: "14,999", usd: "181" },
+      color: "from-yellow-400 to-yellow-600",
+      popular: true
+    },
+    {
+      name: "Platinum",
+      coverage: "100% Services",
+      price: { inr: "19,999", usd: "241" },
+      color: "from-purple-400 to-purple-600",
+      popular: false
+    },
+    {
+      name: "Bespoke",
+      coverage: "120% Services",
+      price: { inr: "Custom", usd: "Custom" },
+      color: "from-black to-gray-800",
+      popular: false
+    }
+  ];
+
+  const allServices = serviceCategories.flatMap(cat => cat.services);
+  const displayServices = activeCategory === 'all' 
+    ? allServices 
+    : serviceCategories.find(cat => cat.id === activeCategory)?.services || [];
 
   const toggleService = (index) => {
     setExpandedService(expandedService === index ? null : index);
   };
 
   return (
-    <section id="services" className="py-20 px-6 bg-gray-50 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
+    <section id="services" className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div 
           className="text-center mb-16"
           initial="hidden"
@@ -173,197 +289,271 @@ function Services() {
           variants={containerVariants}
         >
           <motion.h1 
-            className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent"
             variants={itemVariants}
           >
-            Ari Business Network: Your Partner in Amazon Success
+            Comprehensive Amazon Consulting Services
           </motion.h1>
-          <motion.h2 
-            className="text-2xl md:text-3xl font-semibold text-gray-700 mb-2"
-            variants={itemVariants}
-          >
-            Services Overview
-          </motion.h2>
           <motion.p 
-            className="text-lg text-gray-600"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
             variants={itemVariants}
           >
-            Simple. Focused. Results that scale your store.
+            From listing optimization to inventory management, we have the expertise to streamline your operations and boost your success on Amazon.
           </motion.p>
         </motion.div>
 
-        {/* Optional Banner Image */}
+        {/* Category Filters */}
         <motion.div 
-          className="mb-12 rounded-2xl overflow-hidden relative"
+          className="flex flex-wrap justify-center gap-4 mb-12"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={imageVariants}
-        >
-          <img
-            src={services}
-            alt="Our Services"
-            className="w-full h-64 md:h-96 object-cover"
-            style={{ filter: 'grayscale(100%)' }}
-          />
-          {/* Animated overlay */}
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          />
-          
-          {/* Floating elements */}
-          <motion.div 
-            className="absolute top-6 left-6 w-8 h-8 bg-white/20 rounded-full"
-            animate={floatingAnimation}
-          />
-          <motion.div 
-            className="absolute bottom-6 right-6 w-6 h-6 bg-white/20 rounded-full"
-            animate={{
-              ...floatingAnimation,
-              transition: { ...floatingAnimation.transition, delay: 1 }
-            }}
-          />
-        </motion.div>
-
-        {/* Services List */}
-        <motion.div 
-          className="grid md:grid-cols-2 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
           variants={containerVariants}
         >
-          {serviceList.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              whileHover="hover"
-              whileTap="tap"
-              className="bg-white p-6 border-2 border-black rounded-xl cursor-pointer group relative overflow-hidden"
-              onClick={() => toggleService(index)}
-            >
-              {/* Background accent */}
-              <motion.div 
-                className="absolute top-0 right-0 w-20 h-20 bg-black/5 rounded-full -translate-y-10 translate-x-10"
-                whileHover={{ scale: 1.5 }}
-                transition={{ duration: 0.3 }}
-              />
-              
-              {/* Service number with animation */}
-              <motion.div 
-                className="absolute top-4 left-4 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center text-sm font-bold"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
+          <motion.button
+            variants={itemVariants}
+            onClick={() => setActiveCategory('all')}
+            className={`px-6 py-3 rounded-full font-semibold transition-all ${
+              activeCategory === 'all'
+                ? 'bg-black text-white shadow-lg scale-105'
+                : 'bg-white text-gray-700 hover:bg-gray-100 border-2 border-gray-200'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            All Services
+          </motion.button>
+          {serviceCategories.map((category) => {
+            const IconComponent = category.icon;
+            return (
+              <motion.button
+                key={category.id}
+                variants={itemVariants}
+                onClick={() => setActiveCategory(category.id)}
+                className={`px-6 py-3 rounded-full font-semibold transition-all flex items-center gap-2 ${
+                  activeCategory === category.id
+                    ? 'bg-black text-white shadow-lg scale-105'
+                    : 'bg-white text-gray-700 hover:bg-gray-100 border-2 border-gray-200'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {index + 1}
-              </motion.div>
+                <IconComponent size={18} />
+                {category.name}
+              </motion.button>
+            );
+          })}
+        </motion.div>
 
-              <div className="ml-12">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl md:text-2xl font-bold pr-8 group-hover:text-gray-700 transition-colors">
-                    {service.title}
-                  </h3>
-                  <motion.div
-                    animate={{ rotate: expandedService === index ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {expandedService === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                  </motion.div>
-                </div>
-                
-                <p className="text-gray-700 mb-4 leading-relaxed">
-                  {service.description}
-                </p>
-
-                <AnimatePresence>
-                  {expandedService === index && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="border-t border-gray-200 pt-4">
-                        <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                          <Check size={16} className="text-green-600" />
-                          Key Features:
-                        </h4>
-                        <ul className="space-y-2">
-                          {service.features.map((feature, featureIndex) => (
-                            <motion.li
-                              key={featureIndex}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: featureIndex * 0.1 }}
-                              className="flex items-center gap-2 text-gray-600"
-                            >
-                              <div className="w-1.5 h-1.5 bg-black rounded-full"></div>
-                              {feature}
-                            </motion.li>
-                          ))}
-                        </ul>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Hover arrow indicator */}
+        {/* Services Grid */}
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+        >
+          <AnimatePresence mode="popLayout">
+            {displayServices.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
                 <motion.div
-                  className="flex items-center gap-2 text-black mt-4 opacity-0 group-hover:opacity-100 transition-opacity"
-                  initial={{ x: -10 }}
-                  whileHover={{ x: 0 }}
+                  key={service.title}
+                  layout
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  whileHover="hover"
+                  className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden cursor-pointer group"
+                  onClick={() => toggleService(index)}
                 >
-                  <span className="text-sm font-medium">
-                    {expandedService === index ? "Show less" : "Learn more"}
-                  </span>
-                  <ArrowRight size={16} />
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <motion.div 
+                          className="w-12 h-12 rounded-xl bg-gradient-to-br from-black to-gray-700 flex items-center justify-center text-white"
+                          whileHover={{ rotate: 360 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <IconComponent size={24} />
+                        </motion.div>
+                        <h3 className="text-xl font-bold">{service.title}</h3>
+                      </div>
+                      <motion.div
+                        animate={{ rotate: expandedService === index ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {expandedService === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                      </motion.div>
+                    </div>
+
+                    <p className="text-gray-600 mb-4 leading-relaxed">
+                      {service.description}
+                    </p>
+
+                    {service.highlight && (
+                      <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-3 rounded-lg mb-4 border-l-4 border-black">
+                        <p className="text-sm font-semibold text-gray-800">{service.highlight}</p>
+                      </div>
+                    )}
+
+                    <AnimatePresence>
+                      {expandedService === index && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <div className="border-t-2 border-gray-100 pt-4 mt-4">
+                            <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                              <Check size={16} className="text-green-600" />
+                              Key Features:
+                            </h4>
+                            <ul className="space-y-2">
+                              {service.features.map((feature, featureIndex) => (
+                                <motion.li
+                                  key={featureIndex}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: featureIndex * 0.1 }}
+                                  className="flex items-start gap-2 text-gray-700"
+                                >
+                                  <div className="w-1.5 h-1.5 bg-black rounded-full mt-2 flex-shrink-0"></div>
+                                  <span className="text-sm">{feature}</span>
+                                </motion.li>
+                              ))}
+                            </ul>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <motion.div
+                      className="flex items-center gap-2 text-black mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-sm font-medium"
+                      initial={{ x: -10 }}
+                      whileHover={{ x: 0 }}
+                    >
+                      <span>{expandedService === index ? "Show less" : "Learn more"}</span>
+                      <ArrowRight size={16} />
+                    </motion.div>
+                  </div>
                 </motion.div>
-              </div>
-            </motion.div>
-          ))}
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Pricing Section */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="mb-16"
+        >
+          <motion.h2 
+            className="text-4xl font-bold text-center mb-4"
+            variants={itemVariants}
+          >
+            Flexible Pricing Options
+          </motion.h2>
+          <motion.p 
+            className="text-center text-gray-600 mb-12 max-w-2xl mx-auto"
+            variants={itemVariants}
+          >
+            Choose the package that fits your business needs, from essential services to fully customized solutions
+          </motion.p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {pricingTiers.map((tier, index) => (
+              <motion.div
+                key={tier.name}
+                variants={cardVariants}
+                whileHover="hover"
+                className={`relative rounded-2xl p-8 ${
+                  tier.popular 
+                    ? 'bg-gradient-to-br from-black to-gray-800 text-white' 
+                    : 'bg-white border-2 border-gray-200'
+                }`}
+              >
+                {tier.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-1 rounded-full text-sm font-bold">
+                    Most Popular
+                  </div>
+                )}
+                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${tier.color} mb-4 flex items-center justify-center text-white text-2xl font-bold`}>
+                  {tier.name.charAt(0)}
+                </div>
+                <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
+                <p className={`mb-4 ${tier.popular ? 'text-gray-300' : 'text-gray-600'}`}>
+                  {tier.coverage}
+                </p>
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-3xl font-bold">₹{tier.price.inr}</span>
+                    {tier.price.inr !== 'Custom' && <span className="text-sm opacity-70">/month</span>}
+                  </div>
+                  <div className={`text-sm mt-1 ${tier.popular ? 'text-gray-300' : 'text-gray-500'}`}>
+                    ${tier.price.usd} USD
+                  </div>
+                </div>
+                <motion.button
+                  className={`w-full py-3 rounded-lg font-semibold transition-colors ${
+                    tier.popular
+                      ? 'bg-white text-black hover:bg-gray-100'
+                      : 'bg-black text-white hover:bg-gray-800'
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Get Started
+                </motion.button>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* CTA Section */}
         <motion.div
-          className="text-center mt-16 p-8 bg-black text-white rounded-2xl"
+          className="text-center p-12 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-3xl relative overflow-hidden"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <motion.h3 
-            className="text-2xl md:text-3xl font-bold mb-4"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            Ready to Transform Your Amazon Business?
-          </motion.h3>
-          <motion.p 
-            className="text-gray-300 mb-6 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-          >
-            Let's discuss how our comprehensive services can drive your success on Amazon.
-          </motion.p>
-          <motion.button
-            className="bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get Started Today
-          </motion.button>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24" />
+          
+          <div className="relative z-10">
+            <motion.h3 
+              className="text-3xl md:text-4xl font-bold mb-4"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              Ready to Transform Your Amazon Business?
+            </motion.h3>
+            <motion.p 
+              className="text-gray-300 mb-8 max-w-2xl mx-auto text-lg"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              Let's discuss how our comprehensive services can streamline your operations, boost sales, and maximize your success on Amazon.
+            </motion.p>
+            <motion.button
+              className="bg-white text-black px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Get Started Today
+              <ArrowRight size={20} />
+            </motion.button>
+          </div>
         </motion.div>
       </div>
     </section>
