@@ -27,7 +27,7 @@ function Navbar() {
               />
             </button>
             <span 
-              className="text-2xl font-bold hover:text-gray-600 transition cursor-pointer" 
+              className="text-xl font-bold hover:text-gray-600 transition cursor-pointer" 
               onClick={() => scrollToSection('home')}
             >
               ARI BUSINESS NETWORK
