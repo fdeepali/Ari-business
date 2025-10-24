@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import React from 'react';
 import { Linkedin, Instagram, Youtube, Phone, Mail, MapPin } from 'lucide-react';
+=======
+import React from 'react'
+import { Linkedin, Instagram, Youtube, Phone, Mail, MapPin } from 'lucide-react'
+>>>>>>> 83c0f9daad288942b830aacb0f352bd98d999944
 
 export function Footer() {
   return (
     <footer className="bg-black text-white py-12 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
+<<<<<<< HEAD
           <div className="text-3xl font-bold mb-2">ARI BUSINESS NETWORK</div>
           <p className="text-gray-300 mb-6">© 2025 ARI BUSINESS NETWORK | Amazon Consulting Partner</p>
 
@@ -19,6 +25,21 @@ export function Footer() {
               <Mail size={18} />
               <span>info@aribusinessnetwork.com</span>
             </a>
+=======
+          <div className="text-3xl font-bold mb-2">Ari Business Network</div>
+          <p className="text-gray-300 mb-6">© 2025 Ari Business Network | Amazon Consulting Partner</p>
+
+          {/* Contact Info */}
+          <div className="flex flex-col md:flex-row justify-center gap-6 mb-6 text-gray-300">
+            <div className="flex items-center justify-center gap-2">
+              <Phone size={18} />
+              <span>+91 91376 96515</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <Mail size={18} />
+              <span>info@aribusinessnetwork.com</span>
+            </div>
+>>>>>>> 83c0f9daad288942b830aacb0f352bd98d999944
             <div className="flex items-center justify-center gap-2">
               <MapPin size={18} />
               <span>244/246 Gayatri Niwas, 5th Floor, Flat 10, Perin Nariman Street, Fort, Mumbai - 400001</span>
