@@ -45,8 +45,8 @@ function Navbar() {
             <button onClick={() => scrollToSection('services')} className="font-medium hover:text-gray-600 transition">
               Services
             </button>
-            <button onClick={() => scrollToSection('case-studies')} className="font-medium hover:text-gray-600 transition">
-              Case Studies
+            <button onClick={() => scrollToSection('catalog')} className="font-medium hover:text-gray-600 transition">
+              Catalog & Content
             </button>
             <button 
               onClick={() => scrollToSection('contact')} 
@@ -75,9 +75,9 @@ function Navbar() {
               <button onClick={() => scrollToSection('services')} className="w-full text-left font-medium hover:text-gray-600 transition">
                 Services
               </button>
-              <button onClick={() => scrollToSection('case-studies')} className="w-full text-left font-medium hover:text-gray-600 transition">
-                Case Studies
-              </button>
+              <button onClick={() => scrollToSection('catalog')} className="w-full text-left font-medium hover:text-gray-600 transition">
+                Catalog & Content
+              </button>              
               <button onClick={() => scrollToSection('contact')} className="bg-black text-white px-6 py-3 rounded font-semibold hover:bg-gray-800 transition">
                 Let's Talk
               </button>

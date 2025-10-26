@@ -4,6 +4,9 @@ import about from '../assets/about.jpg';
 import profile_image from '../assets/pfp_rahul.jpeg';
 import { Target, Rocket, TrendingUp, Check, Menu, X, Phone, Mail, MapPin, Linkedin, Youtube, ArrowRight, Package, BarChart3, FileText, Calculator, Instagram, ChevronLeft, ChevronRight, Award, Users, Globe, Shield } from 'lucide-react';
 
+import partner_image from '../assets/partner_image.webp'
+import logo_image from '../assets/logo.jpg'
+
 // Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -282,60 +285,66 @@ function About() {
         </motion.div>
 
         {/* Company Credentials */}
-        <motion.div 
-          className="mb-20 text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-        >
-          <motion.p 
-            className="text-gray-500 mb-12 text-lg"
-            variants={itemVariants}
-          >
-            Trusted by leading brands through our network companies
-          </motion.p>
-          <motion.div 
-            className="flex flex-col md:flex-row justify-center gap-8 items-center"
-            variants={containerVariants}
-          >
-            <motion.div 
-              className="group cursor-pointer"
-              variants={itemVariants}
-              whileHover={{ 
-                scale: 1.05,
-                y: -5
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 group-hover:border-yellow-500">
-                <div className="w-16 h-16 bg-black rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-500 transition-colors duration-300">
-                  <Users className="text-white group-hover:text-black" size={32} />
-                </div>
-                <h4 className="font-bold text-2xl text-gray-900 mb-2">Ari Business Network</h4>
-                <p className="text-gray-600">Amazon FBA Specialists</p>
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="group cursor-pointer"
-              variants={itemVariants}
-              whileHover={{ 
-                scale: 1.05,
-                y: -5
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 group-hover:border-yellow-500">
-                <div className="w-16 h-16 bg-black rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-500 transition-colors duration-300">
-                  <Globe className="text-white group-hover:text-black" size={32} />
-                </div>
-                <h4 className="font-bold text-2xl text-gray-900 mb-2">Bombay Ad Cartel</h4>
-                <p className="text-gray-600">Digital Marketing Experts</p>
-              </div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+<motion.div 
+  className="mb-20 text-center"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={containerVariants}
+>
+  <motion.p 
+    className="text-gray-500 mb-12 text-lg"
+    variants={itemVariants}
+  >
+    Trusted by leading brands through our network companies
+  </motion.p>
+
+  <motion.div 
+    className="flex flex-col md:flex-row justify-center gap-8 items-center"
+    variants={containerVariants}
+  >
+    {/* Ari Business Network */}
+    <motion.div 
+      className="group cursor-pointer w-full md:w-[350px]"
+      variants={itemVariants}
+      whileHover={{ scale: 1.05, y: -5 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <div className="bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700">
+        <div className="w-28 h-28 rounded-xl flex items-center justify-center mx-auto mb-4 overflow-hidden">
+          <img 
+            src={logo_image} 
+            alt="Ari Business Network" 
+            className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105" 
+          />
+        </div>
+        <h4 className="font-bold text-2xl text-white mb-2">Ari Business Network</h4>
+        <p className="text-gray-300">Amazon FBA Specialists</p>
+      </div>
+    </motion.div>
+
+    {/* Bombay Ad Cartel */}
+    <motion.div 
+      className="group cursor-pointer w-full md:w-[350px]"
+      variants={itemVariants}
+      whileHover={{ scale: 1.05, y: -5 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <div className="bg-gradient-to-br from-[#1a2a6c] via-[#b21f1f] to-[#fdbb2d] p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700">
+        <div className="w-28 h-28 rounded-xl flex items-center justify-center mx-auto mb-4 overflow-hidden">
+          <img 
+            src={partner_image} 
+            alt="Bombay Ad Cartel" 
+            className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105" 
+          />
+        </div>
+        <h4 className="font-bold text-2xl text-white mb-2">Bombay Ad Cartel</h4>
+        <p className="text-gray-200">Digital Marketing Experts</p>
+      </div>
+    </motion.div>
+  </motion.div>
+</motion.div>
+
 
         {/* Enhanced Stats Section */}
         <motion.div 
