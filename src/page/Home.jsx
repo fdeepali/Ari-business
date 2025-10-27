@@ -14,6 +14,7 @@ import Contact from '../components/Contact';
 import HeroSection from '../components/HeroSection';
 import CatalogManagement from '../components/CatalogManagement';
 import HowItWorks from '../components/HowItWorks';
+import PartnerSlider from '../components/PartnerSlider';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,6 +52,8 @@ export default function Home() {
 
       {/* Hero Section with Image Slider */}
       <HeroSection/>
+
+      <PartnerSlider/>
 
       {/* About with Image */}
       <div className='-mt-1'>
