@@ -5,7 +5,7 @@ import profile_image from '../assets/pfp_rahul.jpeg';
 import { Target, Rocket, TrendingUp, Check, Menu, X, Phone, Mail, MapPin, Linkedin, Youtube, ArrowRight, Package, BarChart3, FileText, Calculator, Instagram, ChevronLeft, ChevronRight, Award, Users, Globe, Shield } from 'lucide-react';
 
 import partner_image from '../assets/partner_image.webp'
-import logo_image from '../assets/logo.jpg'
+import partner2_image from '../assets/adi_logo.png'
 
 // Animation variants
 const containerVariants = {
@@ -303,23 +303,32 @@ function About() {
     className="flex flex-col md:flex-row justify-center gap-8 items-center"
     variants={containerVariants}
   >
-    {/* Ari Business Network */}
+    {/* ADISOFT.IN */}
     <motion.div 
       className="group cursor-pointer w-full md:w-[350px]"
       variants={itemVariants}
       whileHover={{ scale: 1.05, y: -5 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700">
-        <div className="w-28 h-28 rounded-xl flex items-center justify-center mx-auto mb-4 overflow-hidden">
+      <div className="bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center">
+        <div className="w-28 h-28 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
           <img 
-            src={logo_image} 
-            alt="Ari Business Network" 
+            src={partner2_image} 
+            alt="ADI Soft" 
             className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105" 
           />
         </div>
-        <h4 className="font-bold text-2xl text-white mb-2">Ari Business Network</h4>
-        <p className="text-gray-300">Amazon FBA Specialists</p>
+        <h4 className="font-bold text-2xl text-white mb-2">adisoft.in</h4>
+        <p className="text-gray-300 mb-6">Trusted Partner in Digital Excellence</p>
+
+        <a 
+          href="https://www.adisoft.in" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300"
+        >
+          Visit Website
+        </a>
       </div>
     </motion.div>
 
@@ -330,8 +339,8 @@ function About() {
       whileHover={{ scale: 1.05, y: -5 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="bg-gradient-to-br from-[#1a2a6c] via-[#b21f1f] to-[#fdbb2d] p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700">
-        <div className="w-28 h-28 rounded-xl flex items-center justify-center mx-auto mb-4 overflow-hidden">
+      <div className="bg-gradient-to-br from-[#1a2a6c] via-[#b21f1f] to-[#fdbb2d] p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center">
+        <div className="w-28 h-28 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
           <img 
             src={partner_image} 
             alt="Bombay Ad Cartel" 
@@ -339,7 +348,16 @@ function About() {
           />
         </div>
         <h4 className="font-bold text-2xl text-white mb-2">Bombay Ad Cartel</h4>
-        <p className="text-gray-200">Digital Marketing Experts</p>
+        <p className="text-gray-200 mb-6">Digital Marketing Experts</p>
+
+        <a 
+          href="https://www.bombayadcartel.com" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300"
+        >
+          Visit Website
+        </a>
       </div>
     </motion.div>
   </motion.div>
