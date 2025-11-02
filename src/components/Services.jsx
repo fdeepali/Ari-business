@@ -503,7 +503,6 @@ function Services() {
           </AnimatePresence>
         </motion.div>
 
-        {/* CTA Section */}
         <motion.div
           className="text-center p-12 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-3xl relative overflow-hidden"
           initial={{ opacity: 0, y: 40 }}
