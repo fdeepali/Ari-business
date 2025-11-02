@@ -60,9 +60,6 @@ export default function Home() {
       {/* How It Works */}
       <HowItWorks id="how-it-works" />
 
-      {/* Terms and Conditions / Policies */}
-      <TermsAndConditions />
-
       {/* Contact Section */}
       <Contact />
     </div>
