@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Target, Rocket, TrendingUp, Check, Menu, X, Phone, Mail, MapPin, Linkedin, Youtube, ArrowRight, Package, BarChart3, FileText, Calculator, Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  Target, Rocket, TrendingUp, Check, Menu, X, Phone, Mail, MapPin,
+  Linkedin, Youtube, ArrowRight, Package, BarChart3, FileText,
+  Calculator, Instagram, ChevronLeft, ChevronRight
+} from 'lucide-react';
 
-// Import images
 import h1 from '../assets/hero_slider1.webp';
 import h2 from '../assets/hero_slider2.png';
 import h3 from '../assets/hero_slider3.png';
 import h4 from '../assets/hero_slider4.jpg';
 
+import HeroSection from '../components/HeroSection';
+import PartnerSlider from '../components/PartnerSlider';
 import About from '../components/About';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Services from '../components/Services';
-import Contact from '../components/Contact';
-import HeroSection from '../components/HeroSection';
 import CatalogManagement from '../components/CatalogManagement';
 import HowItWorks from '../components/HowItWorks';
-import PartnerSlider from '../components/PartnerSlider';
+import TermsAndConditions from '../components/TermsAndConditions';
+import Contact from '../components/Contact';
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  
   const heroImages = [h1, h2, h3, h4];
 
   // Auto-slide effect
@@ -28,52 +30,41 @@ export default function Home() {
       setCurrentSlide((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [heroImages.length]);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
-  };
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
 
   return (
     <div className="min-h-screen bg-white text-black">
-      
+      {/* Hero / Landing Section */}
+      <HeroSection />
 
-      {/* Hero Section with Image Slider */}
-      <HeroSection/>
+      {/* Partner Companies */}
+      <PartnerSlider />
 
-      <PartnerSlider/>
-
-      {/* About with Image */}
-      <div className='-mt-1'>
-        <About/>
-      </div>     
+      {/* About Section */}
+      <div className="-mt-1">
+        <About />
+      </div>
 
       {/* Why Choose Us */}
-      <WhyChooseUs/>
+      <WhyChooseUs />
 
-      {/* Services with Image */}
-      <Services/>
+      {/* Services */}
+      <Services />
 
-      {/* Detailed Services Section */}
-      <CatalogManagement/>
+      {/* Catalog Management */}
+      <CatalogManagement />
 
       {/* How It Works */}
-      <HowItWorks id='how-it-works'/>
+      <HowItWorks id="how-it-works" />
 
-      {/* contact */}
-      <Contact/>
+      {/* Terms and Conditions / Policies */}
+      <TermsAndConditions />
+
+      {/* Contact Section */}
+      <Contact />
     </div>
   );
 }
