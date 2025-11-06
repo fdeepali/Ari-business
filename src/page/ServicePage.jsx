@@ -34,7 +34,7 @@ const cardVariants = {
   }
 };
 
-function Services() {
+function ServicePage() {
   const [expandedService, setExpandedService] = useState(null);
   const [activeCategory, setActiveCategory] = useState('all');
 
@@ -336,7 +336,7 @@ function Services() {
   };
 
   return (
-    <section id="services" className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+    <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div 
@@ -547,4 +547,4 @@ function Services() {
   );
 }
 
-export default Services;
+export default ServicePage;

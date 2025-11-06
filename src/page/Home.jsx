@@ -14,11 +14,11 @@ import HeroSection from '../components/HeroSection';
 import PartnerSlider from '../components/PartnerSlider';
 import About from '../components/About';
 import WhyChooseUs from '../components/WhyChooseUs';
-import Services from '../components/Services';
 import CatalogManagement from '../components/CatalogManagement';
 import HowItWorks from '../components/HowItWorks';
-import TermsAndConditions from '../components/TermsAndConditions';
 import Contact from '../components/Contact';
+import CrossBorderSellerQuestionnaire from '../components/CrossBorderSellerQuestionnaire';
+import ServicesSummary from '../components/ServicesSummary';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -44,7 +44,7 @@ export default function Home() {
       <PartnerSlider />
 
       {/* About Section */}
-      <div className="-mt-1">
+      <div id="about">
         <About />
       </div>
 
@@ -52,7 +52,7 @@ export default function Home() {
       <WhyChooseUs />
 
       {/* Services */}
-      <Services />
+      <ServicesSummary />
 
       {/* Catalog Management */}
       <CatalogManagement />

@@ -73,7 +73,7 @@ const floatingAnimation = {
 
 function About() {
   return (
-    <section id="about" className="py-5 px-6 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+    <section className="py-5 px-6 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <motion.div 
