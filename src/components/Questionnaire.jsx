@@ -516,7 +516,6 @@ export default function Questionnaire() {
                 </div>
               </div>
 
-              {/* Submit Options */}
               <div className="mt-12">
                 <p className="text-center text-gray-600 mb-6">
                   Choose how you'd like to send us your information
