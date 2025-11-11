@@ -19,6 +19,7 @@ import HowItWorks from '../components/HowItWorks';
 import Contact from '../components/Contact';
 import CrossBorderSellerQuestionnaire from '../components/CrossBorderSellerQuestionnaire';
 import ServicesSummary from '../components/ServicesSummary';
+import Questionnaire from '../components/Questionnaire';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -39,6 +40,9 @@ export default function Home() {
     <div className="min-h-screen bg-white text-black">
       {/* Hero / Landing Section */}
       <HeroSection />
+
+      {/* User Questionnaire */}
+      <Questionnaire/>
 
       {/* Partner Companies */}
       <PartnerSlider />

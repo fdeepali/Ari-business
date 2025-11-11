@@ -35,7 +35,7 @@ const HeroSection = () => {
     };
 
     return (
-        <section id="home" className="relative mt-20 h-[500px] md:h-[700px] overflow-hidden bg-black">
+        <section id="home" className="relative mt-20 min-h-[500px] md:min-h-[700px] overflow-hidden bg-black">
             {images.map((slide, index) => (
                 <div
                     key={index}

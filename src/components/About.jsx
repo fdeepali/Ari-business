@@ -2,10 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import about from '../assets/about.jpg';
 import profile_image from '../assets/pfp_rahul.jpeg';
-import { Target, Rocket, TrendingUp, Check, Menu, X, Phone, Mail, MapPin, Linkedin, Youtube, ArrowRight, Package, BarChart3, FileText, Calculator, Instagram, ChevronLeft, ChevronRight, Award, Users, Globe, Shield } from 'lucide-react';
+import { Award, Users, TrendingUp, Shield, Instagram, Linkedin, Mail } from 'lucide-react';
 
 import partner_image from '../assets/partner_image.webp'
 import partner2_image from '../assets/adi_logo.png'
+import partner3_image from '../assets/helium10_logo.png'
+import partner4_image from '../assets/payoneer_logo.png'
 
 // Animation variants
 const containerVariants = {
@@ -117,7 +119,6 @@ function About() {
             alt="Amazon FBA Experts Team" 
             className="w-full h-64 md:h-96 object-cover group-hover:scale-105 transition-transform duration-700"
           />
-          {/* Enhanced overlay */}
           <motion.div 
             className="absolute inset-0 bg-gradient-to-r from-black/40 to-black/20"
             initial={{ opacity: 0 }}
@@ -125,7 +126,6 @@ function About() {
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.8 }}
           />
-          {/* Floating text overlay */}
           <motion.div 
             className="absolute bottom-8 left-8 text-white"
             initial={{ opacity: 0, x: -30 }}
@@ -138,7 +138,7 @@ function About() {
           </motion.div>
         </motion.div>
         
-        {/* Founder Spotlight - Enhanced */}
+        {/* Founder Spotlight */}
         <motion.div 
           className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white p-8 md:p-12 mb-16 rounded-3xl relative overflow-hidden shadow-2xl"
           initial="hidden"
@@ -147,7 +147,6 @@ function About() {
           variants={cardVariants}
           whileHover="hover"
         >
-          {/* Enhanced background decorative elements */}
           <motion.div 
             className="absolute top-0 right-0 w-40 h-40 bg-yellow-500/10 rounded-full -translate-y-20 translate-x-20"
             animate={floatingAnimation}
@@ -179,7 +178,6 @@ function About() {
                   alt="Rahul Vanzara - Amazon FBA Expert" 
                   className="w-48 md:w-56 aspect-square rounded-2xl object-cover border-4 border-yellow-500 shadow-2xl"
                 />
-                {/* Verified badge */}
                 <motion.div 
                   className="absolute -bottom-3 -right-3 bg-yellow-500 text-black p-2 rounded-full shadow-lg"
                   initial={{ scale: 0 }}
@@ -226,7 +224,6 @@ function About() {
                 market leaders through strategic Amazon consulting and data-driven growth strategies.
               </motion.p>
 
-              {/* Expertise Tags */}
               <motion.div 
                 className="flex flex-wrap gap-3 mb-8 justify-center lg:justify-start"
                 variants={containerVariants}
@@ -246,7 +243,6 @@ function About() {
                 ))}
               </motion.div>
 
-              {/* Social Links */}
               <motion.div 
                 className="flex gap-4 justify-center lg:justify-start"
                 variants={itemVariants}
@@ -284,89 +280,148 @@ function About() {
           </div>
         </motion.div>
 
-        {/* Company Credentials */}
-<motion.div 
-  className="mb-20 text-center"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  variants={containerVariants}
->
-  <motion.p 
-    className="text-gray-500 mb-12 text-lg"
-    variants={itemVariants}
-  >
-    Trusted by leading brands through our network companies
-  </motion.p>
-
-  <motion.div 
-    className="flex flex-col md:flex-row justify-center gap-8 items-center"
-    variants={containerVariants}
-  >
-    {/* ADISOFT.IN */}
-    <motion.div 
-      className="group cursor-pointer w-full md:w-[350px]"
-      variants={itemVariants}
-      whileHover={{ scale: 1.05, y: -5 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <div className="bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center">
-        <div className="w-28 h-28 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
-          <img 
-            src={partner2_image} 
-            alt="ADI Soft" 
-            className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105" 
-          />
-        </div>
-        <h4 className="font-bold text-2xl text-white mb-2">adisoft.in</h4>
-        <p className="text-gray-300 mb-6">Trusted Partner in Digital Excellence</p>
-
-        <a 
-          href="https://www.adisoft.in" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300"
-        >
-          Visit Website
-        </a>
-      </div>
-    </motion.div>
-
-    {/* Bombay Ad Cartel */}
-    <motion.div 
-      className="group cursor-pointer w-full md:w-[350px]"
-      variants={itemVariants}
-      whileHover={{ scale: 1.05, y: -5 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <div className="bg-gradient-to-br from-[#1a2a6c] via-[#b21f1f] to-[#fdbb2d] p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center">
-        <div className="w-28 h-28 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
-          <img 
-            src={partner_image} 
-            alt="Bombay Ad Cartel" 
-            className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105" 
-          />
-        </div>
-        <h4 className="font-bold text-2xl text-white mb-2">Bombay Ad Cartel</h4>
-        <p className="text-gray-200 mb-6">Digital Marketing Experts</p>
-
-        <a 
-          href="https://www.bombayadcartel.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300"
-        >
-          Visit Website
-        </a>
-      </div>
-    </motion.div>
-  </motion.div>
-</motion.div>
-
-
-        {/* Enhanced Stats Section */}
+        {/* Strategic Partners */}
         <motion.div 
-          className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+          className="mb-20 text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+        >
+          <motion.h3 
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent"
+            variants={itemVariants}
+          >
+            Our Strategic Partners
+          </motion.h3>
+          <motion.p 
+            className="text-gray-500 mb-12 text-lg"
+            variants={itemVariants}
+          >
+            Trusted by leading brands through our network companies and Amazon seller tools
+          </motion.p>
+
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
+            variants={containerVariants}
+          >
+            {/* ADISOFT.IN */}
+            <motion.div 
+              className="group cursor-pointer"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center h-full">
+                <div className="w-24 h-24 rounded-xl flex items-center justify-center mb-4 overflow-hidden bg-white">
+                  <img 
+                    src={partner2_image} 
+                    alt="ADI Soft" 
+                    className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105 p-2" 
+                  />
+                </div>
+                <h4 className="font-bold text-xl text-white mb-2">adisoft.in</h4>
+                <p className="text-gray-300 mb-4 text-sm flex-grow">Digital Excellence Partner</p>
+                <a 
+                  href="https://www.adisoft.in" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300 text-sm"
+                >
+                  Visit Website
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Bombay Ad Cartel */}
+            <motion.div 
+              className="group cursor-pointer"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="bg-gradient-to-br from-[#1a2a6c] via-[#b21f1f] to-[#fdbb2d] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center h-full">
+                <div className="w-24 h-24 rounded-xl flex items-center justify-center mb-4 overflow-hidden bg-white">
+                  <img 
+                    src={partner_image} 
+                    alt="Bombay Ad Cartel" 
+                    className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105 p-2" 
+                  />
+                </div>
+                <h4 className="font-bold text-xl text-white mb-2">Bombay Ad Cartel</h4>
+                <p className="text-gray-200 mb-4 text-sm flex-grow">Digital Marketing Experts</p>
+                <a 
+                  href="https://www.bombayadcartel.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300 text-sm"
+                >
+                  Visit Website
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Helium10 */}
+            <motion.div 
+              className="group cursor-pointer"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="bg-gradient-to-br from-[#2d3561] via-[#4a5f8f] to-[#6c7eb8] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center h-full">
+                <div className="w-24 h-24 rounded-xl flex items-center justify-center mb-4 overflow-hidden bg-white">
+                  <img 
+                    src={partner3_image} 
+                    alt="Helium 10" 
+                    className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105 p-2" 
+                  />
+                </div>
+                <h4 className="font-bold text-xl text-white mb-2">Helium 10</h4>
+                <p className="text-gray-200 mb-4 text-sm flex-grow">Amazon Keyword Research</p>
+                <a 
+                  href="https://i.helium10.com/raPZj3" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300 text-sm"
+                >
+                  Sign Up Now
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Payoneer */}
+            <motion.div 
+              className="group cursor-pointer"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="bg-gradient-to-br from-[#e74c3c] via-[#f39c12] to-[#f1c40f] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center h-full">
+                <div className="w-24 h-24 rounded-xl flex items-center justify-center mb-4 overflow-hidden bg-white">
+                  <img 
+                    src={partner4_image} 
+                    alt="Payoneer" 
+                    className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105 p-2" 
+                  />
+                </div>
+                <h4 className="font-bold text-xl text-white mb-2">Payoneer</h4>
+                <p className="text-gray-200 mb-4 text-sm flex-grow">Cross-Border Payment Solutions</p>
+                <a 
+                  href="https://tracking.payoneer.com/aff_ad?campaign_id=954&aff_id=47992" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300 text-sm"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Stats Section */}
+        <motion.div 
+          className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -409,7 +464,7 @@ function About() {
 
         {/* CTA Section */}
         <motion.div 
-          className="text-center mt-20"
+          className="text-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
