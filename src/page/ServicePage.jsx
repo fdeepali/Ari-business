@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ArrowRight, ChevronDown, ChevronUp, Image, FileText, TrendingUp, Package, DollarSign, Award, Shield, Globe, Truck, BarChart3, Users, BookOpen, AlertCircle, Zap, Code, Layout, Palette } from 'lucide-react';
+import {
+  Check, ArrowRight, ChevronDown, ChevronUp, Image as ImageIcon, FileText,
+  TrendingUp, Package, DollarSign, Award, Shield, Globe, Truck, BarChart3,
+  Users, BookOpen, AlertCircle, Zap, Code, Layout, Palette
+} from 'lucide-react';
 
+// Image imports
+import supportAccount from '../assets/services-img1.png';
+import supportGlobal from '../assets/services-img2.png';
+import supportTraining from '../assets/services-img3.png';
+import supportBrand from '../assets/services-img4.jpg';
+
+// --- Framer Motion Variants (Kept existing, but will apply them more thoroughly) ---
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -34,15 +45,63 @@ const cardVariants = {
   }
 };
 
+const supportBlockVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.98 },
+    visible: { 
+        opacity: 1, 
+        y: 0, 
+        scale: 1,
+        transition: { type: "spring", stiffness: 100, damping: 20 }
+    }
+};
+
+// Reusable block for the stacked "Comprehensive Amazon Support" sections (Refactored)
+function SupportBlock({ imageSrc, captionIcon: Icon, captionTitle, captionText }) {
+  return (
+    <motion.div
+        className="mb-12 border border-gray-100 p-4 rounded-3xl bg-white shadow-xl"
+        variants={supportBlockVariants}
+        whileHover={{ boxShadow: "0 25px 50px rgba(0,0,0,0.1)" }}
+    >
+      <div className="max-w-3xl mx-auto">
+        <div className="rounded-2xl overflow-hidden bg-gray-100 relative">
+          <img
+            src={imageSrc}
+            alt={captionTitle}
+            className="w-full h-56 md:h-64 object-cover transition-transform duration-500 hover:scale-105"
+          />
+
+            {/* Caption overlay integrated with the image container */}
+            <div className="absolute bottom-4 left-4 right-4 max-w-lg">
+              <div className="bg-white/90 backdrop-blur rounded-xl border border-gray-200 p-4 shadow-lg flex items-start gap-4">
+                <div className="flex-shrink-0 mt-1">
+                    <Icon className="text-black" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">{captionTitle}</h3>
+                  <p className="text-sm text-gray-600 leading-snug">
+                    {captionText}
+                  </p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+
 function ServicePage() {
   const [expandedService, setExpandedService] = useState(null);
   const [activeCategory, setActiveCategory] = useState('all');
 
+  // --- Service Data (Unchanged) ---
   const serviceCategories = [
     {
       id: 'digital',
       name: 'Digital & Creative',
-      icon: Zap, // Using Zap for Digital
+      icon: Zap,
       color: 'from-pink-500 to-red-600',
       services: [
         {
@@ -76,8 +135,8 @@ function ServicePage() {
           features: [
             "Custom e-commerce store setup (e.g., Shopify, WooCommerce)",
             "Seamless integration with inventory systems",
-            "**Integration of Razorpay payment gateway**", // ADDED
-            "**Integration of Hello Leads CRM tool**", // ADDED
+            "**Integration of Razorpay payment gateway**",
+            "**Integration of Hello Leads CRM tool**",
             "Mobile-first, responsive design",
             "iOS/Android application development"
           ],
@@ -105,7 +164,7 @@ function ServicePage() {
       services: [
         {
           title: "Imaging",
-          icon: Image,
+          icon: ImageIcon,
           description: "Professional photography that maximizes all 9 image spaces Amazon provides. Strategic visual storytelling that sets you apart from competitors using random photos.",
           features: [
             "Utilize all 9 Amazon image slots strategically",
@@ -296,39 +355,15 @@ function ServicePage() {
   ];
 
   const pricingTiers = [
-    {
-      name: "Silver",
-      coverage: "50% Services",
-      price: { inr: "9,999", usd: "121" },
-      color: "from-gray-400 to-gray-600",
-      popular: false
-    },
-    {
-      name: "Gold",
-      coverage: "80% Services",
-      price: { inr: "14,999", usd: "181" },
-      color: "from-yellow-400 to-yellow-600",
-      popular: true
-    },
-    {
-      name: "Platinum",
-      coverage: "100% Services",
-      price: { inr: "19,999", usd: "241" },
-      color: "from-purple-400 to-purple-600",
-      popular: false
-    },
-    {
-      name: "Bespoke",
-      coverage: "120% Services",
-      price: { inr: "Custom", usd: "Custom" },
-      color: "from-black to-gray-800",
-      popular: false
-    }
+    { name: "Silver", coverage: "50% Services", price: { inr: "9,999", usd: "121" }, color: "from-gray-400 to-gray-600", popular: false },
+    { name: "Gold", coverage: "80% Services", price: { inr: "14,999", usd: "181" }, color: "from-yellow-400 to-yellow-600", popular: true },
+    { name: "Platinum", coverage: "100% Services", price: { inr: "19,999", usd: "241" }, color: "from-purple-400 to-purple-600", popular: false },
+    { name: "Bespoke", coverage: "120% Services", price: { inr: "Custom", usd: "Custom" }, color: "from-black to-gray-800", popular: false }
   ];
 
   const allServices = serviceCategories.flatMap(cat => cat.services);
-  const displayServices = activeCategory === 'all' 
-    ? allServices 
+  const displayServices = activeCategory === 'all'
+    ? allServices
     : serviceCategories.find(cat => cat.id === activeCategory)?.services || [];
 
   const toggleService = (index) => {
@@ -339,20 +374,20 @@ function ServicePage() {
     <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
         >
-          <motion.h1 
+          <motion.h1
             className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent"
             variants={itemVariants}
           >
             Comprehensive E-commerce & Digital Marketing Services
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-xl text-gray-600 max-w-3xl mx-auto"
             variants={itemVariants}
           >
@@ -360,8 +395,8 @@ function ServicePage() {
           </motion.p>
         </motion.div>
 
-        {/* Category Filters */}
-        <motion.div 
+        {/* --- Service Category Filters --- */}
+        <motion.div
           className="flex flex-wrap justify-center gap-4 mb-12"
           initial="hidden"
           whileInView="visible"
@@ -381,6 +416,7 @@ function ServicePage() {
           >
             All Services
           </motion.button>
+
           {serviceCategories.map((category) => {
             const IconComponent = category.icon;
             return (
@@ -403,12 +439,12 @@ function ServicePage() {
           })}
         </motion.div>
 
-        {/* Services Grid */}
-        <motion.div 
+        {/* --- Services Grid (Interactive Cards) --- */}
+        <motion.div
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={containerVariants}
         >
           <AnimatePresence mode="popLayout">
@@ -429,7 +465,7 @@ function ServicePage() {
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <motion.div 
+                        <motion.div
                           className="w-12 h-12 rounded-xl bg-gradient-to-br from-black to-gray-700 flex items-center justify-center text-white"
                           whileHover={{ rotate: 360 }}
                           transition={{ duration: 0.6 }}
@@ -503,8 +539,75 @@ function ServicePage() {
           </AnimatePresence>
         </motion.div>
 
+        {/* --- Comprehensive Amazon Support (Refactored Parent) --- */}
         <motion.div
-          className="text-center p-12 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-3xl relative overflow-hidden"
+            className="relative py-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={containerVariants}
+        >
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10">
+              End-to-End Amazon Success Pillars 🏗️
+            </h2>
+          <div className="space-y-10">
+            <SupportBlock
+              imageSrc={supportAccount}
+              captionIcon={Users}
+              captionTitle="Account Management"
+              captionText="We provide ongoing support and proactive recommendations to help you manage and optimize your Amazon seller account for long-term health and success."
+            />
+
+            <motion.div 
+                className="h-px bg-gray-200 w-full" 
+                variants={itemVariants} 
+                initial="hidden" 
+                whileInView="visible" 
+                viewport={{ once: true, amount: 0.8 }} 
+            />
+
+            <SupportBlock
+              imageSrc={supportGlobal}
+              captionIcon={Globe}
+              captionTitle="Global Payments and Logistics"
+              captionText="Streamline your international payments and fulfillment needs with expert guidance on global payment solutions and efficient FBA warehousing."
+            />
+
+            <motion.div 
+                className="h-px bg-gray-200 w-full" 
+                variants={itemVariants}
+                initial="hidden" 
+                whileInView="visible" 
+                viewport={{ once: true, amount: 0.8 }}
+            />
+
+            <SupportBlock
+              imageSrc={supportTraining}
+              captionIcon={BookOpen}
+              captionTitle="Training and Onboarding"
+              captionText="Benefit from our 90-day seller training program, designed to equip you and your team with the knowledge and skills needed to thrive on the Amazon platform."
+            />
+
+            <motion.div 
+                className="h-px bg-gray-200 w-full" 
+                variants={itemVariants}
+                initial="hidden" 
+                whileInView="visible" 
+                viewport={{ once: true, amount: 0.8 }}
+            />
+
+            <SupportBlock
+              imageSrc={supportBrand}
+              captionIcon={Award}
+              captionTitle="Brand Building & A+ Content"
+              captionText="Elevate your brand's presence on Amazon with our expert support in creating compelling Enhanced Brand Content (EBC/A+), including free page creation."
+            />
+          </div>
+        </motion.div>
+
+        {/* --- CTA --- */}
+        <motion.div
+          className="text-center p-12 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-3xl relative overflow-hidden mt-16"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -512,9 +615,9 @@ function ServicePage() {
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24" />
-          
+
           <div className="relative z-10">
-            <motion.h3 
+            <motion.h3
               className="text-3xl md:text-4xl font-bold mb-4"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -523,7 +626,7 @@ function ServicePage() {
             >
               Ready to Transform Your Amazon Business?
             </motion.h3>
-            <motion.p 
+            <motion.p
               className="text-gray-300 mb-8 max-w-2xl mx-auto text-lg"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

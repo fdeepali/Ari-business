@@ -50,7 +50,7 @@ function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {location.pathname === '/services' ? (
+            {location.pathname === '/services' || location.pathname === '/about-rahul' ? (
               <button
                 onClick={() => navigate('/')}
                 className="font-medium hover:text-gray-600 transition"
@@ -103,7 +103,7 @@ function Navbar() {
         {isOpen && (
           <div className="md:hidden pb-6 border-t border-gray-200">
             <div className="flex flex-col space-y-4 pt-4">
-              {location.pathname === '/services' ? (
+              {location.pathname === '/services' || location.pathname === '/about-rahul' ? (
                 <button
                   onClick={() => {
                     navigate('/');
