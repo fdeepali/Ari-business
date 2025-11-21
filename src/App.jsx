@@ -5,7 +5,8 @@ import Navbar from './components/Navbar';
 import { Footer } from './components/Footer';
 import ServicePage from './page/ServicePage';
 import Preloader from './components/Preloader';
-import AboutRahul from './components/AboutRahul';
+import AboutRahul from './page/AboutRahul';
+import BusinessSolutions from './page/BusinessSolutions';
 
 function App() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/services' element={<ServicePage />} />
             <Route path='/about-rahul' element={<AboutRahul />} />
+            <Route path='/business-solutions' element={<BusinessSolutions />} />
           </Routes>
           <Footer />
         </Preloader>
@@ -32,6 +34,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/services' element={<ServicePage />} />
             <Route path='/about-rahul' element={<AboutRahul />} />
+            <Route path='/business-solutions' element={<BusinessSolutions />} />
           </Routes>
           <Footer />
         </>

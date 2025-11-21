@@ -120,10 +120,22 @@ export default function AboutRahul() {
           </p>
         </div>
 
+        {/* ⭐ NEW: Profile Photo Section */}
+        <div className="flex justify-center mb-16">
+          <div className="relative group">
+            <img
+              src={rahulProfile}
+              alt="Rahul Vanzara"
+              className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-yellow-500 shadow-xl group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 rounded-full bg-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+        </div>
+
         {/* Stats Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+            <div key={index} className="text-center p-6 bg:white rounded-2xl shadow-sm border border-gray-100">
               <div className="text-3xl font-bold text-gray-900 mb-2">
                 {animatedStats ? stat.number : '0'}
               </div>
@@ -183,7 +195,7 @@ export default function AboutRahul() {
             <p className="text-gray-600 max-w-2xl mx-auto">
               A proven track record of success across e-commerce, fintech, and corporate banking
             </p>
-          </div>
+            </div>
 
           <div className="max-w-4xl mx-auto">
             <TimelineItem number={1} title="Amazon Channel Partner">
@@ -201,7 +213,7 @@ export default function AboutRahul() {
         </div>
 
         {/* Diverse Experience */}
-        <div className="mb-16">
+        <div className="mb-20"> 
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Diverse Expertise
@@ -261,6 +273,22 @@ export default function AboutRahul() {
             </ExperienceCard>
           </div>
         </div>
+        
+        {/* --- NEW SECTION: Fee Structure & Transparency --- */}
+        <div className="mb-20">
+            <div className="p-8 bg-white rounded-2xl border-l-4 border-yellow-500 shadow-xl max-w-4xl mx-auto">
+                <h3 className="text-3xl font-bold text-gray-900 mb-4">Fee Structure & Transparency</h3>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                    Rahul offers a range of services tailored to meet your needs, each accompanied by a 
+                    <b>{" "}transparent fee structure</b>. His aim is to ensure you understand the value he brings,
+                    and as such, these services fall under a chargeable category. He will be more than
+                    happy to discuss the specific details and provide you with a <b>detailed breakdown of the
+                    costs involved</b>. This approach emphasizes the value provided while acknowledging that
+                    fees apply, inviting further conversation to clarify any uncertainties.
+                </p>
+            </div>
+        </div>
+        {/* --- END NEW SECTION --- */}
 
         {/* CTA Section */}
         <div className="bg-gradient-to-r from-yellow-500 to-amber-600 rounded-2xl p-8 md:p-12 text-center text-white">

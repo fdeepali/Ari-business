@@ -20,6 +20,8 @@ import Contact from '../components/Contact';
 import CrossBorderSellerQuestionnaire from '../components/CrossBorderSellerQuestionnaire';
 import ServicesSummary from '../components/ServicesSummary';
 import Questionnaire from '../components/Questionnaire';
+import Testimonials from '../components/Testimonials';
+import SeeBusinessSolutions from '../components/SeeBusinessSolutions';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -55,6 +57,9 @@ export default function Home() {
       {/* Why Choose Us */}
       <WhyChooseUs />
 
+      {/* Business Solutions */}
+      <SeeBusinessSolutions/>
+
       {/* Services */}
       <ServicesSummary />
 
@@ -64,8 +69,13 @@ export default function Home() {
       {/* How It Works */}
       <HowItWorks id="how-it-works" />
 
+      {/* Testimonials */}
+      <Testimonials/>
+
       {/* Contact Section */}
       <Contact />
+
+
     </div>
   );
 }
