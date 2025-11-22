@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './page/Home';
 import Navbar from './components/Navbar';
@@ -11,7 +11,10 @@ import BusinessSolutions from './page/BusinessSolutions';
 function App() {
   const location = useLocation();
 
-  // Show preloader only when on home page
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [location.pathname]);
+
   const isHomePage = location.pathname === '/';
 
   return (
