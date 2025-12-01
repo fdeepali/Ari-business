@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import slider1 from '../assets/slider1.avif'
+import slider1 from '../assets/hero_slider1.avif'
 import slider2 from '../assets/slider2.jpg'
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
     const images = [
@@ -94,7 +95,7 @@ const HeroSection = () => {
                             onClick={handleCtaClick}
                             className="mt-10 px-8 py-4 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 text-black font-bold rounded-full shadow-[0_0_30px_rgba(234,179,8,0.5)] hover:shadow-[0_0_50px_rgba(234,179,8,0.7)] transition-all duration-300 transform hover:scale-105 border-2 border-yellow-300 opacity-0 animate-[fadeInUp_1s_ease-out_1.1s_forwards] relative overflow-hidden group"
                         >
-                            <span className="relative z-10">Start Your Amazon Success</span>
+                            <Link to='/book-appointment'><span className="relative z-10">Start Your Amazon Success</span></Link>
                             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>
                     </div>
@@ -146,7 +147,7 @@ const HeroSection = () => {
             <div className="absolute bottom-16 left-4 w-16 h-16 border-l-2 border-b-2 border-yellow-500/30 z-20 opacity-50"></div>
             <div className="absolute bottom-16 right-4 w-16 h-16 border-r-2 border-b-2 border-yellow-500/30 z-20 opacity-50"></div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes fadeInDown {
                     from {
                         opacity: 0;

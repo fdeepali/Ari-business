@@ -8,6 +8,7 @@ import partner_image from '../assets/partner_image.webp'
 import partner2_image from '../assets/adi_logo.png'
 import partner3_image from '../assets/helium10_logo.png'
 import partner4_image from '../assets/payoneer_logo.png'
+import partner5_image from '../assets/HelloLeadsCRM.png'
 import { Link } from 'react-router-dom';
 
 // Animation variants
@@ -381,7 +382,8 @@ function About() {
               whileTap={{ scale: 0.95 }}
             >
               <div className="bg-gradient-to-br from-[#1a2a6c] via-[#b21f1f] to-[#fdbb2d] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center h-full">
-                <div className="w-24 h-24 rounded-xl flex items-center justify-center mb-4 overflow-hidden bg-white">
+                <div className="w-24 h-24 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
+
                   <img 
                     src={partner_image} 
                     alt="Bombay Ad Cartel" 
@@ -437,7 +439,7 @@ function About() {
               whileTap={{ scale: 0.95 }}
             >
               <div className="bg-gradient-to-br from-[#e74c3c] via-[#f39c12] to-[#f1c40f] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center h-full">
-                <div className="w-24 h-24 rounded-xl flex items-center justify-center mb-4 overflow-hidden bg:white">
+                <div className="w-24 h-24 rounded-xl flex items-center justify-center mb-4 overflow-hidden bg-white">
                   <img 
                     src={partner4_image} 
                     alt="Payoneer" 
@@ -450,12 +452,44 @@ function About() {
                   href="https://tracking.payoneer.com/aff_ad?campaign_id=954&aff_id=47992" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-block bg:white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300 text-sm"
+                  className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300 text-sm"
+
                 >
                   Get Started
                 </a>
               </div>
             </motion.div>
+
+            {/* HelloLeads CRM */}
+            <motion.div 
+              className="group cursor-pointer"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="bg-gradient-to-br from-[#4b79a1] via-[#283e51] to-[#1e2a38] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 flex flex-col items-center text-center h-full">
+                <div className="w-24 h-24 rounded-xl flex items-center justify-center mb-4 overflow-hidden bg-white">
+                  <img 
+                    src={partner5_image}
+                    alt="HelloLeads CRM" 
+                    className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105 p-2" 
+                  />
+                </div>
+                <h4 className="font-bold text-xl text-white mb-2">HelloLeads CRM</h4>
+                <p className="text-gray-200 mb-4 text-sm flex-grow">
+                  Lead Management & CRM Tool
+                </p>
+                <a 
+                  href="https://app.helloleads.io/index.php/app/account/refernow?referral=SG2TE96086&referrer=Rahul+Vanzara&company=null&userId=129085"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-300 text-sm"
+                >
+                  Claim Offer
+                </a>
+              </div>
+            </motion.div>
+
           </motion.div>
         </motion.div>
 
@@ -519,20 +553,22 @@ function About() {
                 <div className="flex justify-center gap-4 mb-8"> 
                     <motion.button
                         onClick={() => handleScrollOrNavigate('contact')}
-                        className="bg-gray-700 text-white px-8 py-4 rounded-xl font-bold hover:bg-gray-800 transition-colors duration-300"
+                        className="bg-gray-700 hover:cursor-pointer text-white px-8 py-4 rounded-xl font-bold hover:bg-gray-800 transition-colors duration-300"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         >
                         Contact Rahul
                     </motion.button>
 
-                    <motion.button
-                        className="bg-gray-700 text-white px-8 py-4 rounded-xl font-bold hover:bg-gray-800 transition-colors duration-300" 
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Learn More
-                    </motion.button>
+                    <Link to="/business-solutions">
+                        <motion.button
+                          className="bg-gray-700 text-white px-8 py-4 rounded-xl font-bold hover:bg-gray-800 transition-colors duration-300" 
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                      >
+                          Learn More
+                      </motion.button>
+                    </Link>
                 </div>
 
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed"> 

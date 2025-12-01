@@ -6,6 +6,7 @@ import hero1 from '../assets/about-rahul-hero1.jpg';
 import hero2 from '../assets/about-rahul-hero2.webp';
 import venn from '../assets/about-rahul-venn.png';
 import rahulProfile from '../assets/pfp_rahul.jpeg';
+import { Link } from 'react-router-dom';
 
 function Pill({ children, className = "" }) {
   return (
@@ -298,9 +299,11 @@ export default function AboutRahul() {
           <p className="text-yellow-100 mb-6 max-w-2xl mx-auto">
             Leverage Rahul's expertise to scale your e-commerce presence, expand globally, and drive sustainable growth.
           </p>
-          <button className="bg-white text-amber-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 inline-flex items-center">
-            Start Your Journey <ChevronRight size={20} className="ml-2" />
-          </button>
+          <Link to='/book-appointment'>
+            <button className="bg-gray-100 text-amber-600 hover:cursor-pointer px-8 py-3 rounded-full font-semibold hover:bg-white hover:border-3 hover:border-blue-700 transition-colors duration-300 inline-flex items-center">
+              Start Your Journey <ChevronRight size={20} className="ml-2" />
+            </button>
+          </Link>
         </div>
 
       </div>

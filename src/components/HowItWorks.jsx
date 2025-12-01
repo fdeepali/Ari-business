@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function HowItWorks() {
   return (
@@ -33,9 +34,11 @@ function HowItWorks() {
             </div>
           </div>
           <div className="text-center mt-16">
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-              Start Your Growth Journey Today
-            </button>
+            <Link to="/book-appointment">
+              <button className="bg-yellow-500 hover:cursor-pointer hover:bg-yellow-600 text-black font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                Start Your Growth Journey Today
+              </button>
+              </Link>
           </div>
         </div>
       </section>

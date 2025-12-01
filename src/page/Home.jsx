@@ -43,9 +43,6 @@ export default function Home() {
       {/* Hero / Landing Section */}
       <HeroSection />
 
-      {/* User Questionnaire */}
-      <Questionnaire/>
-
       {/* Partner Companies */}
       <PartnerSlider />
 

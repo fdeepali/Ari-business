@@ -4,8 +4,8 @@ import {
     Check, ArrowRight, BookOpen, Truck, Users, Layout, Shield, TrendingUp, Zap, Star,
     Package
 } from 'lucide-react';
+import { Link } from "react-router-dom";
 
-// --- Dummy Image Imports ---
 import heroIllustration from '../assets/services-hero-illustration.webp';
 import complianceFssai from '../assets/compliance-fssai.webp';
 import complianceIso from '../assets/compliance-iso.png';
@@ -28,7 +28,6 @@ import consultingIllustration from '../assets/consulting-illustration.webp';
 import ctaImage from '../assets/cta-image.png';
 import complianceWorkflow from '../assets/compliance-workflow.jpg';
 
-// --- Framer Motion Variants ---
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -55,7 +54,6 @@ const imageVariants = {
     }
 };
 
-// --- Reusable Components ---
 function SectionHeader({ title, children }) {
     return (
         <motion.header
@@ -120,7 +118,6 @@ function RegulatoryItem({ title, description, imageSrc }) {
     );
 }
 
-// --- Main Component ---
 function BusinessSolutions() {
     return (
         <motion.section
@@ -165,28 +162,30 @@ function BusinessSolutions() {
                 {/* Section 2: Business Setup */}
                 <SectionHeader title="Business Setup & Registration" />
 
-                <motion.div className="grid md:grid-cols-3 gap-8 text-center mb-20" variants={containerVariants}>
-                    {[
-                        { num: 1, title: "GST Registration", desc: "Ensure compliance with Goods and Services Tax regulations.", img: setupGst },
-                        { num: 2, title: "Company Registration", desc: "Establishing your business structure, from sole proprietorship to public limited.", img: setupCompanyReg },
-                        { num: 3, title: "Nidhi Company", desc: "Set up a specialized financial service company with Rahul's guidance.", img: setupNidhi }
-                    ].map((item, index) => (
-                        <motion.div 
-                            key={index}
-                            className="group bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-500"
-                            variants={itemVariants}
-                            whileHover={{ y: -8 }}
-                        >
-                            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center mb-4 mx-auto text-white font-bold text-xl group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                                {item.num}
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-700 transition-colors duration-300">{item.title}</h3>
-                            <p className="text-gray-600 mb-6 group-hover:text-gray-700 transition-colors duration-300">{item.desc}</p>
-                            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-4 group-hover:from-amber-100 group-hover:to-yellow-100 transition-colors duration-300">
-                                <img src={item.img} alt={item.title} className="w-32 h-20 object-contain mx-auto group-hover:scale-105 transition-transform duration-300" />
-                            </div>
-                        </motion.div>
-                    ))}
+                <motion.div className="grid md:grid-cols-3 gap-8 mb-20" variants={containerVariants}>
+                    {/* GST */}
+                    <motion.div className="group bg-white p-8 rounded-2xl shadow-lg border hover:shadow-xl" variants={itemVariants}>
+                        <div className="w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">1</div>
+                        <h3 className="text-xl font-bold">GST Registration</h3>
+                        <p className="text-gray-600 mb-4">Ensure GST compliance.</p>
+                        <img src={setupGst} className="w-32 h-20 mx-auto object-contain" />
+                    </motion.div>
+
+                    {/* Company */}
+                    <motion.div className="group bg-white p-8 rounded-2xl shadow-lg border hover:shadow-xl" variants={itemVariants}>
+                        <div className="w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">2</div>
+                        <h3 className="text-xl font-bold">Company Registration</h3>
+                        <p className="text-gray-600 mb-4">Set up your company.</p>
+                        <img src={setupCompanyReg} className="w-32 h-20 mx-auto object-contain" />
+                    </motion.div>
+
+                    {/* Nidhi */}
+                    <motion.div className="group bg-white p-8 rounded-2xl shadow-lg border hover:shadow-xl" variants={itemVariants}>
+                        <div className="w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">3</div>
+                        <h3 className="text-xl font-bold">Nidhi Company</h3>
+                        <p className="text-gray-600 mb-4">Guidance for setup.</p>
+                        <img src={setupNidhi} className="w-32 h-20 mx-auto object-contain" />
+                    </motion.div>
                 </motion.div>
 
                 <motion.div className="h-1 bg-gradient-to-r from-amber-200 to-yellow-200 rounded-full w-full mb-20" variants={itemVariants} />
@@ -196,23 +195,14 @@ function BusinessSolutions() {
 
                 <motion.div className="grid md:grid-cols-2 gap-12 mb-20" variants={containerVariants}>
                     <div className="space-y-6">
-                        <RegulatoryItem title="FSSAI License" description="Obtain the necessary food safety certification to operate your business in the food sector." imageSrc={complianceFssai} />
-                        <RegulatoryItem title="ISO Certification" description="Enhance your brand credibility with internationally recognized quality standards." imageSrc={complianceIso} />
-                        <RegulatoryItem title="Drug License" description="Secure the appropriate licenses to sell pharmaceutical or medical products." imageSrc={complianceDrug} />
-                        <RegulatoryItem title="MSME License" description="Unlock government benefits and support for your enterprise." imageSrc={complianceMsme} />
+                        <RegulatoryItem title="FSSAI License" description="Required certification for food business." imageSrc={complianceFssai} />
+                        <RegulatoryItem title="ISO Certification" description="Boost brand trust & standards." imageSrc={complianceIso} />
+                        <RegulatoryItem title="Drug License" description="Legal approval for pharma products." imageSrc={complianceDrug} />
+                        <RegulatoryItem title="MSME License" description="Access govt MSME benefits." imageSrc={complianceMsme} />
                     </div>
 
-                    <motion.div 
-                        className="relative group"
-                        variants={imageVariants}
-                        whileHover={{ scale: 1.02 }}
-                    >
-                        <img 
-                            src={complianceWorkflow} 
-                            alt="Compliance Workflow" 
-                            className="w-full rounded-3xl shadow-2xl border-4 border-white group-hover:shadow-3xl transition-all duration-500" 
-                        />
-                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <motion.div variants={imageVariants}>
+                        <img src={complianceWorkflow} className="rounded-3xl shadow-2xl border-4 border-white" />
                     </motion.div>
                 </motion.div>
 
@@ -221,28 +211,36 @@ function BusinessSolutions() {
                 {/* Section 4: Branding & Marketing */}
                 <SectionHeader title="Branding & Marketing" />
 
-                <motion.div className="grid md:grid-cols-3 gap-8 text-center mb-20" variants={containerVariants}>
-                    {[
-                        { icon: Zap, title: "Logo Design", desc: "Create a distinctive visual identity for your brand.", img: brandLogo, color: "pink" },
-                        { icon: Package, title: "Packaging Suggestions", desc: "Enhance product presentation and improve conversions.", img: brandPackaging, color: "yellow" },
-                        { icon: Star, title: "Social Media Services", desc: "Develop a strong digital presence and audience engagement.", img: brandSocial, color: "purple" }
-                    ].map((item, index) => (
-                        <motion.div 
-                            key={index}
-                            className="group bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-500"
-                            variants={itemVariants}
-                            whileHover={{ y: -8 }}
-                        >
-                            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br from-${item.color}-100 to-${item.color}-200 flex items-center justify-center mb-4 mx-auto text-${item.color}-600 group-hover:scale-110 transition-transform duration-300`}>
-                                <item.icon size={28} />
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-700 transition-colors duration-300">{item.title}</h3>
-                            <p className="text-gray-600 mb-4 group-hover:text-gray-700 transition-colors duration-300">{item.desc}</p>
-                            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl overflow-hidden group-hover:from-amber-100 group-hover:to-yellow-100 transition-colors duration-300">
-                                <img src={item.img} alt={item.title} className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500" />
-                            </div>
-                        </motion.div>
-                    ))}
+                <motion.div className="grid md:grid-cols-3 gap-8 mb-20" variants={containerVariants}>
+                    {/* Logo */}
+                    <motion.div className="group bg-white p-6 rounded-2xl shadow-lg border hover:shadow-xl" variants={itemVariants}>
+                        <div className="w-16 h-16 bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl flex items-center justify-center text-pink-600 mx-auto mb-4">
+                            <Zap size={28} />
+                        </div>
+                        <h3 className="text-xl font-bold">Logo Design</h3>
+                        <p className="text-gray-600 mb-4">Build strong brand identity.</p>
+                        <img src={brandLogo} className="w-full h-40 object-cover rounded-xl" />
+                    </motion.div>
+
+                    {/* Packaging */}
+                    <motion.div className="group bg-white p-6 rounded-2xl shadow-lg border hover:shadow-xl" variants={itemVariants}>
+                        <div className="w-16 h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl flex items-center justify-center text-yellow-600 mx-auto mb-4">
+                            <Package size={28} />
+                        </div>
+                        <h3 className="text-xl font-bold">Packaging Suggestions</h3>
+                        <p className="text-gray-600 mb-4">Boost product appeal.</p>
+                        <img src={brandPackaging} className="w-full h-40 object-cover rounded-xl" />
+                    </motion.div>
+
+                    {/* Social Media */}
+                    <motion.div className="group bg-white p-6 rounded-2xl shadow-lg border hover:shadow-xl" variants={itemVariants}>
+                        <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center text-purple-600 mx-auto mb-4">
+                            <Star size={28} />
+                        </div>
+                        <h3 className="text-xl font-bold">Social Media Services</h3>
+                        <p className="text-gray-600 mb-4">Grow digital presence.</p>
+                        <img src={brandSocial} className="w-full h-40 object-cover rounded-xl" />
+                    </motion.div>
                 </motion.div>
 
                 <motion.div className="h-1 bg-gradient-to-r from-amber-200 to-yellow-200 rounded-full w-full mb-20" variants={itemVariants} />
@@ -371,13 +369,16 @@ function BusinessSolutions() {
                             Rahul Vanzara specializes in providing <span className="font-bold text-amber-700">customized solutions</span> that address your unique business needs.
                             Connect today for a <span className="font-bold text-amber-700">personalized consultation</span> and discuss your specific requirements.
                         </motion.p>
-                        <motion.button
-                            className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-xl font-bold hover:from-amber-600 hover:to-yellow-700 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Get Started <ArrowRight size={20} />
-                        </motion.button>
+                        <Link to="/book-appointment">
+                            <motion.button
+                                className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-xl font-bold hover:from-amber-600 hover:to-yellow-700 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                Book Appointment <ArrowRight size={20} />
+                            </motion.button>
+                        </Link>
+
                     </div>
 
                     <motion.div 
@@ -405,21 +406,16 @@ function BusinessSolutions() {
                     <h3 className="text-4xl md:text-5xl font-bold mb-8 relative z-10">Ready to Succeed on Amazon?</h3>
 
                     <div className="flex flex-col sm:flex-row justify-center gap-6 mb-10 relative z-10">
+                        <Link to="/book-appointment">
                         <motion.button
                             className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-12 py-4 rounded-xl font-bold text-lg hover:from-amber-600 hover:to-yellow-700 transition-all duration-300 shadow-lg hover:shadow-xl"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            Contact Rahul
+                            Book Appointment
                         </motion.button>
+                    </Link>
 
-                        <motion.button
-                            className="bg-gray-800 text-white px-12 py-4 rounded-xl font-bold text-lg hover:bg-gray-700 transition-all duration-300 shadow-lg hover:shadow-xl border border-amber-500/30"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Learn More
-                        </motion.button>
                     </div>
 
                     <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed relative z-10">

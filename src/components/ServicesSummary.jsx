@@ -96,7 +96,7 @@ const ServicesSummary = () => {
           >
             <motion.button
               onClick={() => window.location.href = '/services'}
-              className="bg-gradient-to-r from-black to-gray-800 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-gray-800 hover:to-black transition-all inline-flex items-center gap-2 shadow-lg"
+              className="bg-gradient-to-r hover:cursor-pointer from-black to-gray-800 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-gray-800 hover:to-black transition-all inline-flex items-center gap-2 shadow-lg"
               whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}
               whileTap={{ scale: 0.95 }}
             >
