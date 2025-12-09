@@ -3,6 +3,8 @@ import { sendEmail } from "./emailController.js";
 
 export const submitQuestionnaire = async (req, res) => {
   try {
+    console.log("✅ submitQuestionnaire HIT");
+
     const data = req.body;
 
     // Validate required fields
