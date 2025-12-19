@@ -4,37 +4,56 @@ import { sendEmail } from "./emailController.js";
 export const submitQuestionnaire = async (req, res) => {
   try {
     console.log("✅ submitQuestionnaire HIT");
+    console.log("[QUESTIONNAIRE] Raw body:", JSON.stringify(req.body, null, 2));
 
     const data = req.body;
 
     // Validate required fields
     if (!data?.contactInfo?.name || !data?.contactInfo?.email) {
+      console.warn("[QUESTIONNAIRE] Missing contact name/email:", {
+        name: data?.contactInfo?.name,
+        email: data?.contactInfo?.email,
+      });
+
       return res.status(400).json({
         success: false,
-        message: "Missing required contact details: name or email."
+        message: "Missing required contact details: name or email.",
       });
     }
 
     if (!data?.businessDetails || Object.keys(data.businessDetails).length === 0) {
+      console.warn("[QUESTIONNAIRE] Business details missing or empty");
       return res.status(400).json({
         success: false,
-        message: "Business details are missing."
+        message: "Business details are missing.",
       });
     }
 
+    console.log("[QUESTIONNAIRE] Validation passed for:", {
+      name: data.contactInfo.name,
+      email: data.contactInfo.email,
+    });
+
     // Save to DB
+    console.log("[QUESTIONNAIRE] Saving document to DB...");
     const saved = await Questionnaire.create(data);
+    console.log("[QUESTIONNAIRE] Saved to DB with id:", saved._id);
 
     // -----------------------------
     // BUILD DYNAMIC BUSINESS DETAILS TABLE
     // -----------------------------
     let businessTableRows = "";
 
+    console.log(
+      "[QUESTIONNAIRE] Building businessDetails table rows. Keys:",
+      Object.keys(data.businessDetails)
+    );
+
     for (const [key, value] of Object.entries(data.businessDetails)) {
       const formattedKey = key
         .replace(/_/g, " ")
         .replace(/([A-Z])/g, " $1")
-        .replace(/\b\w/g, c => c.toUpperCase());
+        .replace(/\b\w/g, (c) => c.toUpperCase());
 
       const formattedValue = Array.isArray(value)
         ? value.join(", ")
@@ -51,6 +70,11 @@ export const submitQuestionnaire = async (req, res) => {
         </tr>
       `;
     }
+
+    console.log(
+      "[QUESTIONNAIRE] businessTableRows length:",
+      businessTableRows.length
+    );
 
     // -----------------------------
     // EMAIL HTML TEMPLATE
@@ -124,27 +148,30 @@ export const submitQuestionnaire = async (req, res) => {
 </html>
     `;
 
+    console.log("[QUESTIONNAIRE] htmlContent length:", htmlContent.length);
+
     // Send email to admin
+    console.log("[QUESTIONNAIRE] Sending email notification to admin...");
     await sendEmail({
       to: "info@aribusinessnetwork.com",
       from: process.env.GMAIL_APP_USER,
       replyTo: data.contactInfo.email,
       subject: `New Questionnaire - ${data.contactInfo.name}`,
-      html: htmlContent
+      html: htmlContent,
     });
+    console.log("[QUESTIONNAIRE] Email sent successfully for id:", saved._id);
 
     // SUCCESS
     return res.status(200).json({
       success: true,
       message: "Questionnaire submitted successfully.",
-      id: saved._id
+      id: saved._id,
     });
-
   } catch (err) {
-    console.error("Questionnaire Error:", err);
+    console.error("[QUESTIONNAIRE] Error in submitQuestionnaire:", err);
     return res.status(500).json({
       success: false,
-      message: "Server error while submitting questionnaire."
+      message: "Server error while submitting questionnaire.",
     });
   }
 };

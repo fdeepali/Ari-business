@@ -27,6 +27,7 @@ export default function QuestionnairePageNew() {
   });
 
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // ----------------- QUESTION CONFIG -----------------
   const questions = [
@@ -73,7 +74,6 @@ export default function QuestionnairePageNew() {
       question: 'If yes, what is your account status?',
       type: 'single',
       options: ['Active', 'Deactivated', 'Suspended', 'N/A']
-      // We'll keep this always visible; user can choose N/A if not applicable
     },
     {
       id: 'productCategory',
@@ -218,10 +218,9 @@ export default function QuestionnairePageNew() {
       ],
       hasOther: true
     }
-    // Contact details are handled separately below as a dedicated step
   ];
 
-  // Contact fields config (from contactDetails)
+  // Contact fields config
   const contactFields = [
     { id: 'name', label: 'Full Name', required: true, icon: User, placeholder: 'John Doe' },
     {
@@ -373,7 +372,6 @@ export default function QuestionnairePageNew() {
         answerText = ans;
       }
 
-      // Add "Other" value if present
       if (q.hasOther && answers[`${q.id}_other`]) {
         answerText += ` - ${answers[`${q.id}_other`]}`;
       }
@@ -400,12 +398,11 @@ export default function QuestionnairePageNew() {
     window.open(`https://wa.me/919137696515?text=${encodedMessage}`, '_blank');
   };
 
-  // ----------------- SUBMIT HANDLER (NO BACKEND) -----------------
+  // ----------------- SUBMIT HANDLER (BACKEND + WHATSAPP) -----------------
 
-  const handleSubmitAndWhatsApp = () => {
+  const handleSubmitAndWhatsApp = async () => {
     setError('');
 
-    // Ensure all steps complete + contact
     if (!isContactInfoComplete() || currentStep < questions.length || !isStepComplete()) {
       const msg = 'Please complete all questions and required contact fields.';
       setError(msg);
@@ -413,18 +410,49 @@ export default function QuestionnairePageNew() {
       return;
     }
 
-    // Directly open WhatsApp with the filled message
-    openWhatsApp();
+    setIsSubmitting(true);
 
-    // Optional: reset form after opening WhatsApp
-    setCurrentStep(0);
-    setAnswers({});
-    setContactInfo({
-      name: '',
-      email: '',
-      phone: '',
-      businessName: ''
-    });
+    try {
+      // Build payload expected by backend submitQuestionnaire controller
+      const payload = {
+        contactInfo,
+        businessDetails: answers
+      };
+
+      const response = await fetch('http://localhost:5000/api/send-email-to-admin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Failed to submit questionnaire');
+      }
+
+      toast.success('Questionnaire submitted successfully! Opening WhatsApp...');
+      // 1) open WhatsApp
+      openWhatsApp();
+
+      // 2) reset form
+      setCurrentStep(0);
+      setAnswers({});
+      setContactInfo({
+        name: '',
+        email: '',
+        phone: '',
+        businessName: ''
+      });
+    } catch (err) {
+      console.error('[QUESTIONNAIRE] submit error:', err);
+      toast.error(err.message || 'Server error while submitting questionnaire.');
+      setError(err.message || 'Server error while submitting questionnaire.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // ----------------- RENDER -----------------
@@ -470,14 +498,12 @@ export default function QuestionnairePageNew() {
           </div>
         </div>
 
-        {/* Error (toast already used, but keeping text if needed) */}
         {error && (
           <p className="mb-4 text-center text-red-500 text-sm">
             {error}
           </p>
         )}
 
-        {/* Question Steps */}
         <AnimatePresence mode="wait">
           {currentStep < questions.length ? (
             <motion.div
@@ -564,7 +590,6 @@ export default function QuestionnairePageNew() {
                   );
                 })}
 
-                {/* Other input field for "Others/Other" */}
                 {questions[currentStep].hasOther && (
                   <>
                     {(answers[questions[currentStep].id] === 'Others' ||
@@ -594,7 +619,6 @@ export default function QuestionnairePageNew() {
                 )}
               </div>
 
-              {/* Navigation Buttons */}
               <div className="flex justify-between mt-12">
                 <motion.button
                   onClick={handlePrevious}
@@ -628,7 +652,6 @@ export default function QuestionnairePageNew() {
               </div>
             </motion.div>
           ) : (
-            // CONTACT DETAILS + DIRECT WHATSAPP STEP
             <motion.div
               key="contact"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -679,40 +702,41 @@ export default function QuestionnairePageNew() {
                 })}
               </div>
 
-              {/* Submit + WhatsApp */}
               <div className="mt-12">
                 <p className="text-center text-gray-600 mb-6">
-                  Submit your details and we will open WhatsApp with a pre-filled message.
+                  Submit your details and we will send them to our team and open WhatsApp with a
+                  pre-filled message.
                 </p>
                 <div className="flex flex-col md:flex-row gap-6 items-stretch">
                   <motion.button
                     onClick={handleSubmitAndWhatsApp}
-                    disabled={!isContactInfoComplete()}
+                    disabled={!isContactInfoComplete() || isSubmitting}
                     className={`flex-1 flex flex-col items-center justify-center p-8 rounded-2xl transition-all shadow-lg group ${
-                      isContactInfoComplete()
+                      isContactInfoComplete() && !isSubmitting
                         ? 'bg-gradient-to-br from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700 cursor-pointer'
                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                     }`}
                     whileHover={
-                      isContactInfoComplete()
+                      isContactInfoComplete() && !isSubmitting
                         ? { scale: 1.05, boxShadow: '0 20px 40px rgba(22, 163, 74, 0.4)' }
                         : {}
                     }
-                    whileTap={isContactInfoComplete() ? { scale: 0.95 } : {}}
+                    whileTap={isContactInfoComplete() && !isSubmitting ? { scale: 0.95 } : {}}
                   >
                     <CheckCircle
                       size={48}
                       className="mb-4 group-hover:scale-110 transition-transform"
                     />
                     <span className="text-2xl font-bold mb-2">
-                      Submit & Open WhatsApp
+                      {isSubmitting ? 'Submitting...' : 'Submit & Open WhatsApp'}
                     </span>
                     <span
                       className={`text-center ${
-                        isContactInfoComplete() ? 'text-green-50' : 'text-gray-500'
+                        isContactInfoComplete() && !isSubmitting ? 'text-green-50' : 'text-gray-500'
                       }`}
                     >
-                      We will prepare your responses and then open WhatsApp with your details
+                      We will save your responses, email them to our team and then open WhatsApp
+                      with your details.
                     </span>
                   </motion.button>
 
@@ -720,8 +744,8 @@ export default function QuestionnairePageNew() {
                     <MessageCircle size={40} className="mb-3" />
                     <span className="font-semibold mb-1">WhatsApp Confirmation</span>
                     <span className="text-sm text-center">
-                      After submission, a WhatsApp chat with us will open automatically with your
-                      responses filled in.
+                      After successful submission, a WhatsApp chat with us will open automatically
+                      with your responses filled in.
                     </span>
                   </motion.div>
                 </div>

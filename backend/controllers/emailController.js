@@ -7,8 +7,8 @@ dotenv.config();
  * GMAIL SMTP TRANSPORT
  */
 const transporter = nodemailer.createTransport({
-  host: "imap.secureserver.net",
-  port: 993,
+  host: "smtpout.secureserver.net",
+  port: 465,
   secure: true,
   auth: {
     user: process.env.GMAIL_APP_USER,
@@ -16,16 +16,27 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("[MAIL] Transport verify error:", error);
+  } else {
+    console.log("[MAIL] Transport is ready to send messages");
+  }
+});
+
 /**
  * Generic Email Sender
  */
 export const sendEmail = async ({ to, subject, text, html, replyTo }) => {
+  console.log("[MAIL] sendEmail called with:", { to, subject, replyTo });
+
   if (!validator.isEmail(to)) {
+    console.error("[MAIL] Invalid recipient email:", to);
     throw new Error("Invalid recipient email");
   }
 
   const mailOptions = {
-    from: process.env.GMAIL_APP_USER,
+    from: replyTo,
     to,
     subject,
     replyTo: replyTo || process.env.GMAIL_APP_USER,
@@ -33,13 +44,38 @@ export const sendEmail = async ({ to, subject, text, html, replyTo }) => {
     html: html || `<pre>${text}</pre>`,
   };
 
-  return transporter.sendMail(mailOptions);
+  console.log("[MAIL] Mail options prepared (without html body for brevity):", {
+    ...mailOptions,
+    html: html ? "[HTML CONTENT]" : "[AUTO-GENERATED FROM TEXT]",
+  });
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("[MAIL] Email sent successfully:", {
+      messageId: info.messageId,
+      accepted: info.accepted,
+      rejected: info.rejected,
+      response: info.response,
+    });
+    return info;
+  } catch (err) {
+    console.error("[MAIL] Error while sending email:", err);
+    throw err;
+  }
 };
 
 /**
  * Contact Form Email (NOT questionnaire — this is separate)
  */
 export const sendContactForm = async ({ name, email, phone, storeUrl, goals }) => {
+  console.log("[MAIL] sendContactForm called with:", {
+    name,
+    email,
+    phone,
+    storeUrl,
+    goalsLength: goals ? goals.length : 0,
+  });
+
   const htmlContent = `
     <!DOCTYPE html>
     <html lang="en">
@@ -101,8 +137,9 @@ export const sendContactForm = async ({ name, email, phone, storeUrl, goals }) =
                             <tr>
                                 <td style="padding: 12px 15px; color: #64748b; font-weight: 600; vertical-align: top;">Amazon Store URL</td>
                                 <td style="padding: 12px 15px; color: #1e293b;">
-                                    ${storeUrl ? 
-                                        `<a href="${storeUrl}" target="_blank" style="color: #0369a1; text-decoration: none; font-weight: 500; word-break: break-all;">${storeUrl}</a>` 
+                                    ${
+                                      storeUrl
+                                        ? `<a href="${storeUrl}" target="_blank" style="color: #0369a1; text-decoration: none; font-weight: 500; word-break: break-all;">${storeUrl}</a>`
                                         : `<span style="color: #94a3b8; font-style: italic;">Not provided</span>`
                                     }
                                 </td>
@@ -134,20 +171,38 @@ export const sendContactForm = async ({ name, email, phone, storeUrl, goals }) =
                     </div>
                     <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
                         <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
-                            <div style="text-align: center; padding: 15px; background: ${storeUrl ? '#dcfce7' : '#fef2f2'}; border-radius: 8px; min-width: 120px;">
-                                <div style="font-size: 24px; margin-bottom: 8px;">${storeUrl ? '✅' : '❌'}</div>
+                            <div style="text-align: center; padding: 15px; background: ${
+                              storeUrl ? "#dcfce7" : "#fef2f2"
+                            }; border-radius: 8px; min-width: 120px;">
+                                <div style="font-size: 24px; margin-bottom: 8px;">${
+                                  storeUrl ? "✅" : "❌"
+                                }</div>
                                 <div style="font-size: 12px; color: #475569; font-weight: 600;">Amazon Store</div>
-                                <div style="font-size: 11px; color: #64748b;">${storeUrl ? 'Provided' : 'Not Provided'}</div>
+                                <div style="font-size: 11px; color: #64748b;">${
+                                  storeUrl ? "Provided" : "Not Provided"
+                                }</div>
                             </div>
-                            <div style="text-align: center; padding: 15px; background: ${phone ? '#dcfce7' : '#fef2f2'}; border-radius: 8px; min-width: 120px;">
-                                <div style="font-size: 24px; margin-bottom: 8px;">${phone ? '✅' : '❌'}</div>
+                            <div style="text-align: center; padding: 15px; background: ${
+                              phone ? "#dcfce7" : "#fef2f2"
+                            }; border-radius: 8px; min-width: 120px;">
+                                <div style="font-size: 24px; margin-bottom: 8px;">${
+                                  phone ? "✅" : "❌"
+                                }</div>
                                 <div style="font-size: 12px; color: #475569; font-weight: 600;">Phone Number</div>
-                                <div style="font-size: 11px; color: #64748b;">${phone ? 'Provided' : 'Not Provided'}</div>
+                                <div style="font-size: 11px; color: #64748b;">${
+                                  phone ? "Provided" : "Not Provided"
+                                }</div>
                             </div>
-                            <div style="text-align: center; padding: 15px; background: ${goals && goals.length > 20 ? '#dcfce7' : '#fef2f2'}; border-radius: 8px; min-width: 120px;">
-                                <div style="font-size: 24px; margin-bottom: 8px;">${goals && goals.length > 20 ? '✅' : '❌'}</div>
+                            <div style="text-align: center; padding: 15px; background: ${
+                              goals && goals.length > 20 ? "#dcfce7" : "#fef2f2"
+                            }; border-radius: 8px; min-width: 120px;">
+                                <div style="font-size: 24px; margin-bottom: 8px;">${
+                                  goals && goals.length > 20 ? "✅" : "❌"
+                                }</div>
                                 <div style="font-size: 12px; color: #475569; font-weight: 600;">Detailed Goals</div>
-                                <div style="font-size: 11px; color: #64748b;">${goals && goals.length > 20 ? 'Comprehensive' : 'Basic'}</div>
+                                <div style="font-size: 11px; color: #64748b;">${
+                                  goals && goals.length > 20 ? "Comprehensive" : "Basic"
+                                }</div>
                             </div>
                         </div>
                     </div>
@@ -163,12 +218,16 @@ export const sendContactForm = async ({ name, email, phone, storeUrl, goals }) =
                       style="display: inline-block; background: #10b981; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px; margin: 0 10px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); transition: all 0.3s ease;">
                       📞 Call Client
                     </a>
-                    ${storeUrl ? `
+                    ${
+                      storeUrl
+                        ? `
                     <a href="${storeUrl}" target="_blank" 
                       style="display: inline-block; background: #f59e0b; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px; margin: 0 10px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); transition: all 0.3s ease;">
                       🛍️ View Store
                     </a>
-                    ` : ''}
+                    `
+                        : ""
+                    }
                 </div>
 
                 <!-- Quick Actions -->
@@ -201,6 +260,8 @@ export const sendContactForm = async ({ name, email, phone, storeUrl, goals }) =
     </body>
     </html>
     `;
+
+  console.log("[MAIL] Contact form HTML length:", htmlContent.length);
 
   return sendEmail({
     to: "info@aribusinessnetwork.com",
