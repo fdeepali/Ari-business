@@ -222,7 +222,7 @@ const sendReceiptMail = async ({ to, name, paymentId, orderId, receiptPath }) =>
   const transporter = nodemailer.createTransport({
     host: "smtpout.secureserver.net",
     port: 587,
-    secure: true,
+    secure: false,
     auth: {
       user: process.env.GMAIL_APP_USER,
       pass: process.env.GMAIL_APP_PASSWORD,
