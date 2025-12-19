@@ -168,8 +168,8 @@ const generateReceiptPDF = ({ name, email, orderId, paymentId, amount, date, fil
 // ----------------------------
 const sendReceiptMail = async ({ to, name, paymentId, orderId, receiptPath }) => {
   const transporter = nodemailer.createTransport({
-    host: "smtpout.secureserver.net",
-    port: 465,
+    host: "imap.secureserver.net",
+    port: 993,
     secure: true,
     auth: {
       user: process.env.GMAIL_APP_USER,

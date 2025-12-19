@@ -224,6 +224,169 @@ function About() {
           ))}
         </motion.div>
 
+        {/* ================= PARTNERS SECTION ================= */}
+        <motion.div
+          className="text-center mb-24"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.h3
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent"
+            variants={itemVariants}
+          >
+            Our Strategic Partners
+          </motion.h3>
+
+          <motion.p
+            className="text-gray-500 mb-12 text-lg"
+            variants={itemVariants}
+          >
+            Trusted by leading brands through our network companies and Amazon seller tools
+          </motion.p>
+
+          {/* -------- MAIN PARTNER (NO BG) -------- */}
+          <motion.div
+            className="max-w-md mx-auto mb-16"
+            variants={itemVariants}
+            whileHover={{ scale: 1.04, y: -6 }}
+            whileTap={{ scale: 0.96 }}
+          >
+            <div className="bg-gradient-to-br from-[#1a2a6c] via-[#b21f1f] to-[#fdbb2d]
+                            p-8 rounded-2xl shadow-xl
+                            flex flex-col items-center text-center">
+
+              <div className="w-28 h-28 flex items-center justify-center mb-4">
+                <img
+                  src={partner_image}
+                  alt="Bombay Ad Cartel"
+                  className="object-contain w-full h-full p-2"
+                />
+              </div>
+
+              <h4 className="font-bold text-2xl text-white mb-2">
+                Bombay Ad Cartel
+              </h4>
+
+              <p className="text-white/90 mb-6">
+                Digital Marketing Experts
+              </p>
+
+              <a
+                href="https://www.bombayadcartel.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-gray-900 font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition"
+              >
+                Visit Website
+              </a>
+            </div>
+          </motion.div>
+
+          {/* -------- SUB PARTNERS GRID -------- */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto"
+            variants={containerVariants}
+          >
+            {/* ADISOFT */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.03, y: -4 }}
+            >
+              <div className="bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] p-6 rounded-2xl shadow-lg border border-gray-700 text-center h-full">
+                <div className="w-24 h-24 bg-white rounded-xl mx-auto mb-4 flex items-center justify-center">
+                  <img src={partner2_image} alt="AdiSoft" className="p-2" />
+                </div>
+                <h4 className="text-xl font-bold text-white mb-2">AdiSoft</h4>
+                <p className="text-gray-300 text-sm mb-4">
+                  Digital Excellence Partner
+                </p>
+                <a
+                  href="https://www.adisoft.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-200"
+                >
+                  Visit Website
+                </a>
+              </div>
+            </motion.div>
+
+            {/* HELIUM 10 */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.03, y: -4 }}
+            >
+              <div className="bg-gradient-to-br from-[#2d3561] via-[#4a5f8f] to-[#6c7eb8] p-6 rounded-2xl shadow-lg border border-gray-700 text-center h-full">
+                <div className="w-24 h-24 bg-white rounded-xl mx-auto mb-4 flex items-center justify-center">
+                  <img src={partner3_image} alt="Helium 10" className="p-2" />
+                </div>
+                <h4 className="text-xl font-bold text-white mb-2">Helium 10</h4>
+                <p className="text-gray-200 text-sm mb-4">
+                  Amazon Keyword Research
+                </p>
+                <a
+                  href="https://i.helium10.com/raPZj3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-200"
+                >
+                  Sign Up Now
+                </a>
+              </div>
+            </motion.div>
+
+            {/* PAYONEER */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.03, y: -4 }}
+            >
+              <div className="bg-gradient-to-br from-[#e74c3c] via-[#f39c12] to-[#f1c40f] p-6 rounded-2xl shadow-lg border border-gray-700 text-center h-full">
+                <div className="w-24 h-24 bg-white rounded-xl mx-auto mb-4 flex items-center justify-center">
+                  <img src={partner4_image} alt="Payoneer" className="p-2" />
+                </div>
+                <h4 className="text-xl font-bold text-white mb-2">Payoneer</h4>
+                <p className="text-gray-200 text-sm mb-4">
+                  Cross-Border Payments
+                </p>
+                <a
+                  href="https://tracking.payoneer.com/aff_ad?campaign_id=954&aff_id=47992"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-200"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+
+            {/* HELLOLEADS CRM */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.03, y: -4 }}
+            >
+              <div className="bg-gradient-to-br from-[#102a43] via-[#243b53] to-[#334e68] p-6 rounded-2xl shadow-lg border border-gray-700 text-center h-full">
+                <div className="w-24 h-24 bg-white rounded-xl mx-auto mb-4 flex items-center justify-center">
+                  <img src={partner5_image} alt="HelloLeads CRM" className="p-2" />
+                </div>
+                <h4 className="text-xl font-bold text-white mb-2">HelloLeads CRM</h4>
+                <p className="text-gray-200 text-sm mb-4">
+                  Lead Management &amp; CRM Tool
+                </p>
+                <a
+                  href="https://app.helloleads.io/index.php/app/account/refernow?referral=SG2TE96086&referrer=Rahul+Vanzara&company=Ari+Business+Network+&userId=129085"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-200"
+                >
+                  Claim Offer
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
         {/* ---------------- FINAL CTA (UPDATED) ---------------- */}
         <motion.div
           className="text-center"
@@ -241,7 +404,7 @@ function About() {
             </h3>
 
             <p className="text-gray-300 max-w-3xl mx-auto mb-10 text-lg">
-              Book a strategy call or get in touch directly — let’s
+              Book a strategy call or get in touch directly — let's
               create a profitable Amazon growth roadmap.
             </p>
 

@@ -7,8 +7,8 @@ dotenv.config();
  * GMAIL SMTP TRANSPORT
  */
 const transporter = nodemailer.createTransport({
-  host: "smtpout.secureserver.net",
-  port: 465,
+  host: "imap.secureserver.net",
+  port: 993,
   secure: true,
   auth: {
     user: process.env.GMAIL_APP_USER,
