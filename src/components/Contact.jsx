@@ -29,7 +29,7 @@ function Contact() {
 
     try {
       const res = await fetch(
-        `https://ari-business-network-1.onrender.com/api/send-contact-form`,
+        `https://ari-business-backend-mongodb-production.up.railway.app/api/send-contact-form`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

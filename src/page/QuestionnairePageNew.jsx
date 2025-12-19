@@ -419,7 +419,7 @@ export default function QuestionnairePageNew() {
         businessDetails: answers
       };
 
-      const response = await fetch('https://ari-business-network-1.onrender.com/api/send-email-to-admin', {
+      const response = await fetch('https://ari-business-backend-mongodb-production.up.railway.app/api/send-email-to-admin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

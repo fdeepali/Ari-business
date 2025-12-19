@@ -14,7 +14,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 export default function QuestionnairePage() {
   const [currentStep, setCurrentStep] = useState(0);
-  const backendUrl = 'https://ari-business-network-1.onrender.com';
+  const backendUrl = 'https://ari-business-backend-mongodb-production.up.railway.app';
 
   // Answers to all non-contact questions
   const [answers, setAnswers] = useState({});
