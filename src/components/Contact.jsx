@@ -4,68 +4,47 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Contact() {
-
   const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    storeUrl: "",
-    goals: ""
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const onSubmit = async (event) => {
+    event.preventDefault();
     setLoading(true);
+    
+    const formData = new FormData(event.target);
+    formData.append("access_key", "fcac1743-0e41-404a-bba1-70105e78370b");
+    formData.append("subject", "New Contact Form Submission");
 
     try {
-      const res = await fetch(
-        `https://ari-business-backend-mongodb-production.up.railway.app/api/send-contact-form`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      const data = await res.json();
-      if (!data.success) throw new Error(data.message);
-
-      toast.success("Your message has been sent! We'll contact you shortly.", {
-        position: "top-center",
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
       });
 
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        storeUrl: "",
-        goals: ""
-      });
-
+      const data = await response.json();
+      
+      if (data.success) {
+        toast.success("Your message has been sent! We'll contact you shortly.", {
+          position: "top-center",
+        });
+        event.target.reset();
+      } else {
+        toast.error("Failed to send message. Please try again.", {
+          position: "top-center",
+        });
+      }
     } catch (err) {
       toast.error("Failed to send message. Please try again.", {
         position: "top-center",
       });
       console.error(err);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <>
       <ToastContainer />
-
       <section id="contact" className="py-20 px-6 bg-gradient-to-br from-gray-900 to-black text-white">
         <div className="max-w-6xl mx-auto">
 
@@ -190,16 +169,13 @@ function Contact() {
                 <p className="text-gray-600">Fill out the form and we'll get back to you within 24 hours</p>
               </div>
 
-              <form className="space-y-6" onSubmit={handleSubmit}>
-
+              <form className="space-y-6" onSubmit={onSubmit}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Your Name *</label>
                     <input
                       type="text"
                       name="name"
-                      value={formData.name}
-                      onChange={handleChange}
                       className="w-full border-2 border-gray-200 p-4 rounded-xl focus:border-yellow-500"
                       required
                     />
@@ -210,8 +186,6 @@ function Contact() {
                     <input
                       type="email"
                       name="email"
-                      value={formData.email}
-                      onChange={handleChange}
                       className="w-full border-2 border-gray-200 p-4 rounded-xl focus:border-yellow-500"
                       required
                     />
@@ -224,8 +198,6 @@ function Contact() {
                     <input
                       type="tel"
                       name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
                       className="w-full border-2 border-gray-200 p-4 rounded-xl focus:border-yellow-500"
                       required
                     />
@@ -236,8 +208,6 @@ function Contact() {
                     <input
                       type="text"
                       name="storeUrl"
-                      value={formData.storeUrl}
-                      onChange={handleChange}
                       className="w-full border-2 border-gray-200 p-4 rounded-xl focus:border-yellow-500"
                     />
                   </div>
@@ -247,8 +217,6 @@ function Contact() {
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Your Business Goals *</label>
                   <textarea
                     name="goals"
-                    value={formData.goals}
-                    onChange={handleChange}
                     rows="4"
                     className="w-full border-2 border-gray-200 p-4 rounded-xl focus:border-yellow-500 resize-none"
                     required
@@ -263,8 +231,6 @@ function Contact() {
                       ${loading ? "opacity-50 cursor-not-allowed hover:scale-100" : ""}
                     `}
                   >
-
-                    {/* Spinner */}
                     {loading ? (
                       <svg
                         className="animate-spin h-6 w-6 mr-3 text-black"
@@ -293,7 +259,6 @@ function Contact() {
                     {loading ? "Sending..." : "Get Free Strategy Session"}
                   </button>
                 </div>
-
               </form>
             </div>
           </div>

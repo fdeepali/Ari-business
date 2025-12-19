@@ -398,7 +398,7 @@ export default function QuestionnairePageNew() {
     window.open(`https://wa.me/919137696515?text=${encodedMessage}`, '_blank');
   };
 
-  // ----------------- SUBMIT HANDLER (BACKEND + WHATSAPP) -----------------
+  // ----------------- WEB3FORMS SUBMIT HANDLER -----------------
 
   const handleSubmitAndWhatsApp = async () => {
     setError('');
@@ -413,43 +413,52 @@ export default function QuestionnairePageNew() {
     setIsSubmitting(true);
 
     try {
-      // Build payload expected by backend submitQuestionnaire controller
-      const payload = {
-        contactInfo,
-        businessDetails: answers
-      };
+      // Generate comprehensive form data for Web3Forms
+      const formData = new FormData();
+      formData.append("access_key", "fcac1743-0e41-404a-bba1-70105e78370b");
+      
+      // Contact info
+      formData.append("name", contactInfo.name);
+      formData.append("email", contactInfo.email);
+      formData.append("phone", contactInfo.phone);
+      formData.append("businessName", contactInfo.businessName || '');
+      
+      const summaryMessage = generateMessage();
+      formData.append("message", summaryMessage);
+      
+      formData.append("subject", `🔔 New Amazon Questionnaire - ${contactInfo.name || 'Lead'}`);
 
-      const response = await fetch('https://ari-business-backend-mongodb-production.up.railway.app/api/send-email-to-admin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
       });
 
-      const result = await response.json();
+      const data = await response.json();
+      
+      if (data.success) {
+        toast.success('Questionnaire submitted successfully! Opening WhatsApp...');
+        // Open WhatsApp after successful email submission
+        setTimeout(() => {
+          openWhatsApp();
+        }, 1000);
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Failed to submit questionnaire');
+        // Reset form
+        setCurrentStep(0);
+        setAnswers({});
+        setContactInfo({
+          name: '',
+          email: '',
+          phone: '',
+          businessName: ''
+        });
+        setError('');
+      } else {
+        throw new Error(data.message || 'Failed to submit questionnaire');
       }
-
-      toast.success('Questionnaire submitted successfully! Opening WhatsApp...');
-      // 1) open WhatsApp
-      openWhatsApp();
-
-      // 2) reset form
-      setCurrentStep(0);
-      setAnswers({});
-      setContactInfo({
-        name: '',
-        email: '',
-        phone: '',
-        businessName: ''
-      });
     } catch (err) {
       console.error('[QUESTIONNAIRE] submit error:', err);
-      toast.error(err.message || 'Server error while submitting questionnaire.');
-      setError(err.message || 'Server error while submitting questionnaire.');
+      toast.error(err.message || 'Failed to submit questionnaire. Please try again.');
+      setError(err.message || 'Failed to submit questionnaire.');
     } finally {
       setIsSubmitting(false);
     }
@@ -520,7 +529,7 @@ export default function QuestionnairePageNew() {
 
               <div
                 className="space-y-4 max-h-[420px] overflow-y-auto pr-2
-               scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+                 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
               >
                 {questions[currentStep].options.map((option, index) => {
                   const q = questions[currentStep];
