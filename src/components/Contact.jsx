@@ -29,7 +29,7 @@ function Contact() {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_APP_BACKEND_URL}/api/send-contact-form`,
+        `https://ari-business-network-1.onrender.com/api/send-contact-form`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

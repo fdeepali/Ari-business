@@ -14,7 +14,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 export default function QuestionnairePage() {
   const [currentStep, setCurrentStep] = useState(0);
-  const backendUrl = import.meta.env.VITE_APP_BACKEND_URL;
+  const backendUrl = 'https://ari-business-network-1.onrender.com';
 
   // Answers to all non-contact questions
   const [answers, setAnswers] = useState({});
@@ -595,7 +595,8 @@ export default function QuestionnairePage() {
                 {questions[currentStep].question}
               </h2>
 
-              <div className="space-y-4">
+              <div className="space-y-4 max-h-[420px] overflow-y-auto pr-2
+             scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
                 {questions[currentStep].options.map((option, index) => {
                   const q = questions[currentStep];
                   const isSingle = q.type === 'single';
