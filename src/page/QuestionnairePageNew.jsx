@@ -419,7 +419,7 @@ export default function QuestionnairePageNew() {
       };
 
       const backendResponse = await fetch(
-        'http://localhost:5000/api/questionnaire',
+        'https://ari-business-network-3.onrender.com/api/questionnaire',
         {
           method: 'POST',
           headers: {

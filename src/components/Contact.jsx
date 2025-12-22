@@ -24,7 +24,7 @@ function Contact() {
       console.log("Submitting contact form with payload:", payload);
 
       const backendResponse = await fetch(
-        "http://localhost:5000/api/contact-form",
+        "https://ari-business-network-3.onrender.com/api/contact-form",
         {
           method: "POST",
           headers: {
