@@ -405,7 +405,6 @@ export default function QuestionnairePageNew() {
 
     if (!isContactInfoComplete() || currentStep < questions.length || !isStepComplete()) {
       const msg = 'Please complete all questions and required contact fields.';
-      setError(msg);
       toast.error(msg);
       return;
     }
@@ -413,56 +412,72 @@ export default function QuestionnairePageNew() {
     setIsSubmitting(true);
 
     try {
-      // Generate comprehensive form data for Web3Forms
+      // ---------------- 1️⃣ SEND TO YOUR BACKEND (JSON) ----------------
+      const backendPayload = {
+        contactInfo,
+        businessDetails: answers
+      };
+
+      const backendResponse = await fetch(
+        'http://localhost:5000/api/questionnaire',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(backendPayload)
+        }
+      );
+
+      if (!backendResponse.ok) {
+        const text = await backendResponse.text();
+        throw new Error(text || 'Backend questionnaire submission failed');
+      }
+
+      const backendData = await backendResponse.json();
+      console.log('Questionnaire saved:', backendData);
+
+      // ---------------- 2️⃣ SEND TO WEB3FORMS (FORMDATA) ----------------
       const formData = new FormData();
       formData.append("access_key", "fcac1743-0e41-404a-bba1-70105e78370b");
-      
-      // Contact info
+      formData.append("subject", `🔔 New Amazon Questionnaire - ${contactInfo.name}`);
+      formData.append("message", generateMessage());
       formData.append("name", contactInfo.name);
       formData.append("email", contactInfo.email);
       formData.append("phone", contactInfo.phone);
-      formData.append("businessName", contactInfo.businessName || '');
-      
-      const summaryMessage = generateMessage();
-      formData.append("message", summaryMessage);
-      
-      formData.append("subject", `🔔 New Amazon Questionnaire - ${contactInfo.name || 'Lead'}`);
+      formData.append("businessName", contactInfo.businessName || "");
 
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const web3Response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData
       });
 
-      const data = await response.json();
-      
-      if (data.success) {
-        toast.success('Questionnaire submitted successfully! Opening WhatsApp...');
-        // Open WhatsApp after successful email submission
-        setTimeout(() => {
-          openWhatsApp();
-        }, 1000);
+      const web3Data = await web3Response.json();
 
-        // Reset form
-        setCurrentStep(0);
-        setAnswers({});
-        setContactInfo({
-          name: '',
-          email: '',
-          phone: '',
-          businessName: ''
-        });
-        setError('');
+      if (!web3Data.success) {
+        toast.warning("Saved to database, but email delivery failed.");
       } else {
-        throw new Error(data.message || 'Failed to submit questionnaire');
+        toast.success("Questionnaire submitted successfully!");
       }
+
+      // ---------------- 3️⃣ OPEN WHATSAPP ----------------
+      setTimeout(() => {
+        openWhatsApp();
+      }, 800);
+
+      // Reset state
+      setCurrentStep(0);
+      setAnswers({});
+      setContactInfo({ name: '', email: '', phone: '', businessName: '' });
+
     } catch (err) {
       console.error('[QUESTIONNAIRE] submit error:', err);
-      toast.error(err.message || 'Failed to submit questionnaire. Please try again.');
-      setError(err.message || 'Failed to submit questionnaire.');
+      console.error(err.message || 'Failed to submit questionnaire');
     } finally {
       setIsSubmitting(false);
     }
   };
+
 
   // ----------------- RENDER -----------------
 

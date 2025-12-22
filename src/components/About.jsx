@@ -375,9 +375,8 @@ function About() {
                   Lead Management &amp; CRM Tool
                 </p>
                 <a
-                  href="https://app.helloleads.io/index.php/app/account/refernow?referral=SG2TE96086&referrer=Rahul+Vanzara&company=Ari+Business+Network+&userId=129085"
+                  href="https://app.helloleads.io/index.php/app/account/refernow?referral=SG2TE96086&referrer=Rahul&company=Ari+Business+Network+&userId=129085"
                   target="_blank"
-                  rel="noopener noreferrer"
                   className="bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-200"
                 >
                   Claim Offer

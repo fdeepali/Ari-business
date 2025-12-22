@@ -10,30 +10,62 @@ function Contact() {
     event.preventDefault();
     setLoading(true);
     
-    const formData = new FormData(event.target);
-    formData.append("access_key", "fcac1743-0e41-404a-bba1-70105e78370b");
-    formData.append("subject", "New Contact Form Submission");
-
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      });
+      const form = event.target;
 
-      const data = await response.json();
-      
-      if (data.success) {
+      const payload = {
+        name: form.name.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        storeUrl: form.storeUrl.value,
+        goals: form.goals.value,
+      };
+
+      console.log("Submitting contact form with payload:", payload);
+
+      const backendResponse = await fetch(
+        "http://localhost:5000/api/contact-form",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const backendData = await backendResponse.json();
+
+      if (!backendData.success) {
+        throw new Error(backendData.message || "Backend save failed");
+      }
+
+      // 2. THEN: Send Email via Web3Forms
+      const emailFormData = new FormData(event.target);
+      emailFormData.append("access_key", "fcac1743-0e41-404a-bba1-70105e78370b");
+      emailFormData.append("subject", "New Contact Form Submission");
+
+      const emailResponse = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: emailFormData
+      });
+      const emailData = await emailResponse.json();
+
+      if (!emailData.success) {
+        console.log("Email failed but data saved to DB:", emailData);
+        toast.warning("Email delivery failed. We'll contact you soon!", {
+          position: "top-center",
+        });
+      } else {
         toast.success("Your message has been sent! We'll contact you shortly.", {
           position: "top-center",
         });
-        event.target.reset();
-      } else {
-        toast.error("Failed to send message. Please try again.", {
-          position: "top-center",
-        });
       }
+
+      event.target.reset();
+      
     } catch (err) {
-      toast.error("Failed to send message. Please try again.", {
+      toast.error(err.message || "Failed to send message. Please try again.", {
         position: "top-center",
       });
       console.error(err);

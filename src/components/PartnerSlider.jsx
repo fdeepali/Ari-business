@@ -8,14 +8,30 @@ import p6 from "../assets/partner6.jpg";
 import p7 from "../assets/partner7.png";
 import p8 from "../assets/partner8.png";
 import p9 from "../assets/partner9.png";
+import p10 from "../assets/partner10.png";
 
-const partners = [p1, p2, p3, p4, p5, p6, p7, p8, p9];
+/**
+ * Partners as objects
+ * (Dummy links for now)
+ */
+const partners = [
+  { img: p1, link: "https://yushefashion.com/" },
+  { img: p2, link: "#" },
+  { img: p3, link: "#" },
+  { img: p4, link: "#" },
+  { img: p5, link: "https://www.robincollection.com/en/?srsltid=AfmBOorw-Ihi7uDIzbDocXWun3zA44KEIQyQsl9zdvXgfE0jBk69a0go" },
+  { img: p6, link: "https://miraclejewelsbymj.com/" },
+  { img: p7, link: "#" },
+  { img: p8, link: "#" },
+  { img: p9, link: "https://purelyindian.us/" },
+  { img: p10, link: "https://tantratshirts.com/", whiteLogo : true }
+];
 
 export default function PartnerSlider() {
   const [slide, setSlide] = useState(0);
-  const [perSlide, setPerSlide] = useState(5); // default for large screens
+  const [perSlide, setPerSlide] = useState(5);
 
-  // Adjust number of logos per slide based on window width
+  // Responsive logos per slide
   useEffect(() => {
     const updatePerSlide = () => {
       if (window.innerWidth < 640) {
@@ -34,9 +50,10 @@ export default function PartnerSlider() {
 
   const slidesCount = Math.ceil(partners.length / perSlide);
 
+  // Auto slide
   useEffect(() => {
     const interval = setInterval(() => {
-      setSlide((prev) => (prev + 1) % slidesCount);
+      setSlide(prev => (prev + 1) % slidesCount);
     }, 3000);
     return () => clearInterval(interval);
   }, [slidesCount]);
@@ -44,6 +61,7 @@ export default function PartnerSlider() {
   return (
     <section className="py-20 px-4 sm:px-6 bg-white border-y-2 border-gray-200">
       <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
             Trusted by Leading Brands
@@ -54,7 +72,7 @@ export default function PartnerSlider() {
         </div>
 
         <div className="relative overflow-hidden">
-          {/* Slider Container */}
+          {/* Slider */}
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(-${slide * 100}%)` }}
@@ -65,31 +83,83 @@ export default function PartnerSlider() {
                 className="min-w-full flex justify-center items-center gap-4 md:gap-8 px-2"
               >
                 {partners
-                  .slice(slideIndex * perSlide, slideIndex * perSlide + perSlide)
-                  .map((img, index) => (
+                  .slice(
+                    slideIndex * perSlide,
+                    slideIndex * perSlide + perSlide
+                  )
+                  .map((partner, index) => (
                     <div
                       key={index}
-                      className="flex-shrink-0 w-20 sm:w-28 md:w-36 h-20 sm:h-28 md:h-36 bg-white border-2 border-gray-200 rounded-lg shadow-sm hover:shadow-md flex items-center justify-center p-2 sm:p-4 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-105 hover:border-black"
+                      className={`group relative flex-shrink-0
+                        w-20 sm:w-28 md:w-36
+                        h-20 sm:h-28 md:h-36
+                        border-2 rounded-lg shadow-sm
+                        flex items-center justify-center
+                        p-2 sm:p-4 overflow-hidden
+                        transition-all duration-500
+                        hover:scale-105 hover:border-black hover:shadow-md
+                        ${
+                          partner.whiteLogo
+                            ? "bg-black border-black grayscale-0"
+                            : "bg-white border-gray-200 grayscale hover:grayscale-0"
+                        }
+                      `}
                     >
+
+                      {/* Logo */}
                       <img
-                        src={img}
+                        src={partner.img}
                         alt={`Partner ${slideIndex * perSlide + index + 1}`}
-                        className="object-contain w-full h-full opacity-70 hover:opacity-100 transition-opacity duration-500"
+                        className={`object-contain w-full h-full transition-opacity duration-500
+                          ${
+                            partner.whiteLogo
+                              ? "opacity-100"
+                              : "opacity-70 group-hover:opacity-100"
+                          }
+                        `}
                       />
+
+                      {/* Hover overlay */}
+                      <div
+                        className="absolute inset-0 bg-black/60
+                                   opacity-0 group-hover:opacity-100
+                                   transition-opacity duration-300
+                                   flex items-center justify-center"
+                      >
+                        <a
+                          href={partner.link === "#" ? "/" : partner.link}
+                          target={partner.link === "#" ? "_self" : "_blank"}
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            if (partner.link === "#") {
+                              e.preventDefault(); // stop jump
+                              // stay on '/'
+                            }
+                          }}
+                          className="px-4 py-2 text-sm font-semibold
+                                    bg-white text-black rounded-md
+                                    hover:bg-black hover:text-white
+                                    transition-colors"
+                        >
+                          Visit
+                        </a>
+                      </div>
                     </div>
                   ))}
               </div>
             ))}
           </div>
 
-          {/* Navigation Dots */}
+          {/* Dots */}
           <div className="flex justify-center gap-2 mt-8">
             {Array.from({ length: slidesCount }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => setSlide(index)}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  index === slide ? "bg-black w-8" : "bg-gray-300 hover:bg-gray-400"
+                  index === slide
+                    ? "bg-black w-8"
+                    : "bg-gray-300 hover:bg-gray-400"
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

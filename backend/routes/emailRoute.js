@@ -1,31 +1,48 @@
-import express from 'express';
-import { submitQuestionnaire } from '../controllers/questionnaireController.js';
-import { createOrder, verifyPaymentController } from '../controllers/paymentController.js';
+import express from "express";
+import Contact from "../models/Contact.js";
+import { submitQuestionnaire } from "../controllers/newQuestionnaireController.js";
 
 const router = express.Router();
-
-router.post('/create-order', createOrder);
-router.post('/verify-payment', verifyPaymentController);
-router.post('/send-email-to-admin', submitQuestionnaire);
-import { sendContactForm } from "../controllers/emailController.js";
-
-router.post("/send-contact-form", async (req, res) => {
+console.log("📦 emailRoute.js loaded");
+router.post("/contact-form", async (req, res) => {
   try {
+    console.log("✅ /contact-form hit");
+    console.log("Content-Type:", req.headers["content-type"]);
+    console.log("Body:", req.body);
+
     const { name, email, phone, storeUrl, goals } = req.body;
 
-    await sendContactForm({ name, email, phone, storeUrl, goals });
+    if (!name || !email || !phone || !goals) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required contact fields",
+      });
+    }
 
-    return res.status(200).json({
+    const contact = await Contact.create({
+      name,
+      email,
+      phone,
+      storeUrl,
+      goals,
+    });
+
+    console.log("📩 Contact saved:", contact._id);
+
+    return res.status(201).json({
       success: true,
       message: "Contact form submitted successfully",
+      id: contact._id,
     });
   } catch (err) {
-    console.error("Contact form error:", err);
+    console.error("❌ Contact form error:", err);
     return res.status(500).json({
       success: false,
       message: "Failed to submit contact form",
     });
   }
 });
+
+router.post("/questionnaire", submitQuestionnaire);
 
 export default router;
