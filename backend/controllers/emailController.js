@@ -9,7 +9,6 @@ dotenv.config();
 const transporter = nodemailer.createTransport({
   host: "smtpout.secureserver.net",
   port: 587,
-  secure: true,
   auth: {
     user: process.env.GMAIL_APP_USER,
     pass: process.env.GMAIL_APP_PASSWORD,
