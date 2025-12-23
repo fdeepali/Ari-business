@@ -25,7 +25,7 @@ const partners = [
   { img: p7, link: "#" },
   { img: p8, link: "#" },
   { img: p9, link: "https://purelyindian.us/" },
-  { img: p10, link: "https://tantratshirts.com/", whiteLogo : true }
+  { img: p10, link: "https://tantratshirts.com?bg_ref=nQvLij6myR", whiteLogo : true }
 ];
 
 export default function PartnerSlider() {

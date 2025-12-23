@@ -59,7 +59,7 @@ function CatalogManagement() {
           <div className="mb-20">
             <div className="text-center mb-16">
               <span className="text-yellow-600 font-semibold text-lg tracking-wide">EXPERT ACCOUNT MANAGEMENT</span>
-              <h2 className="text-4xl md:text-5xl font-bold mt-4 bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">Account & Advertising Management</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mt-4 bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent py-2">Account & Advertising Management</h2>
               <p className="text-gray-600 text-xl mt-6 max-w-3xl mx-auto">Maximize your Amazon potential with proactive account management and data-driven advertising strategies</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">

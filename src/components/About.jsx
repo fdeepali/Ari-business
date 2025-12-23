@@ -246,44 +246,6 @@ function About() {
             Trusted by leading brands through our network companies and Amazon seller tools
           </motion.p>
 
-          {/* -------- MAIN PARTNER (NO BG) -------- */}
-          <motion.div
-            className="max-w-md mx-auto mb-16"
-            variants={itemVariants}
-            whileHover={{ scale: 1.04, y: -6 }}
-            whileTap={{ scale: 0.96 }}
-          >
-            <div className="bg-gradient-to-br from-[#1a2a6c] via-[#b21f1f] to-[#fdbb2d]
-                            p-8 rounded-2xl shadow-xl
-                            flex flex-col items-center text-center">
-
-              <div className="w-28 h-28 flex items-center justify-center mb-4">
-                <img
-                  src={partner_image}
-                  alt="Bombay Ad Cartel"
-                  className="object-contain w-full h-full p-2"
-                />
-              </div>
-
-              <h4 className="font-bold text-2xl text-white mb-2">
-                Bombay Ad Cartel
-              </h4>
-
-              <p className="text-white/90 mb-6">
-                Digital Marketing Experts
-              </p>
-
-              <a
-                href="https://www.bombayadcartel.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-gray-900 font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition"
-              >
-                Visit Website
-              </a>
-            </div>
-          </motion.div>
-
           {/* -------- SUB PARTNERS GRID -------- */}
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto"
