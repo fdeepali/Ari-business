@@ -9,13 +9,15 @@ import AboutRahul from './page/AboutRahul';
 import BusinessSolutions from './page/BusinessSolutions';
 import QuestionnairePage from './page/QuestionnairePage';
 import QuestionnairePageNew from './page/QuestionnairePageNew';
+import { pageview } from './utils/gtag';
 
 function App() {
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, [location.pathname]);
+    pageview(location.pathname);
+  }, [location]);
 
   const isHomePage = location.pathname === '/';
 
