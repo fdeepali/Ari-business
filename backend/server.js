@@ -59,6 +59,7 @@ app.post("/api/contact-form", async (req, res) => {
 });
 
 import QuestionnaireSubmission from "./models/DB_Questionnaire.js";
+import Links from "./models/Links.js";
 // ---------------- QUESTIONNAIRE ROUTE (INLINE) ----------------
 app.post("/api/questionnaire", async (req, res) => {
   try {
@@ -120,6 +121,139 @@ app.post("/api/questionnaire", async (req, res) => {
   }
 });
 
+app.get("/api/contact-forms", async (req, res) => {
+  try {
+    const header = req.headers["authorization"];
+    const token = header && header.split(" ")[1];
+    if(token !== process.env.HEADER_API_KEY){
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+    }
+    const forms = await Contact.find().sort({ createdAt: -1 });
+    return res.json({
+      success: true,
+      data: forms,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      message: "Internal server error!",
+    })
+  }
+});
+
+app.get('/api/increament-url', async (req, res) => {
+  try {
+    const url = req.query.url;
+    if (!url) {
+      return res.status(400).json({ success: false });
+    }
+
+    const link = await Links.findOne({ url });
+    if (!link) {
+      return res.status(404).json({ success: false });
+    }
+
+    link.count += 1;
+    await link.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Link count incremented",
+      count: link.count,
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false });
+  }
+});
+
+
+app.get('/api/links', async (req, res) => {
+  try {
+    const header = req.headers["authorization"];
+    const token = header && header.split(" ")[1];
+    if(token !== process.env.HEADER_API_KEY){
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+    }
+
+    const data = await Links.find();
+    return res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error!",
+    });
+  }
+})
+
+app.post('/api/add-link', async (req, res) => {
+  try {
+    const header = req.headers["authorization"];
+    const token = header && header.split(" ")[1];
+    if(token !== process.env.HEADER_API_KEY){
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+    }
+
+    const {url, name} = req.body;
+    if(!url || !name){
+      return res.status(400).json({
+        success: false,
+        message: "URL and Name are required",
+      });
+    }
+
+    const newLink = new Links({url, name});
+    await newLink.save();
+
+    return res.status(201).json({
+      success: true,
+      message: "Link added successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error!",
+    });
+  }
+})
+
+app.get("/api/questionnaire-submissions", async (req, res) => {
+  try {
+    const header = req.headers["authorization"];
+    const token = header && header.split(" ")[1];
+    if(token !== process.env.HEADER_API_KEY){
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+    }
+    const submissions = await QuestionnaireSubmission.find().sort({ createdAt: -1 });
+    return res.json({
+      success: true,
+      data: submissions,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      message: "Internal server error!",
+    });
+  }
+})
 
 // ---------------- HEALTH CHECK ----------------
 app.get("/", (req, res) => {

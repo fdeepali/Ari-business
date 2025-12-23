@@ -9,6 +9,7 @@ import p7 from "../assets/partner7.png";
 import p8 from "../assets/partner8.png";
 import p9 from "../assets/partner9.png";
 import p10 from "../assets/partner10.png";
+import axios from "axios";
 
 /**
  * Partners as objects
@@ -130,10 +131,19 @@ export default function PartnerSlider() {
                           href={partner.link === "#" ? "/" : partner.link}
                           target={partner.link === "#" ? "_self" : "_blank"}
                           rel="noopener noreferrer"
-                          onClick={(e) => {
+                          onClick={async (e) => {
                             if (partner.link === "#") {
-                              e.preventDefault(); // stop jump
-                              // stay on '/'
+                              e.preventDefault();                               
+                            } else {
+                              try {
+                                axios.get(`https://ari-business-network-3.onrender.com/api/increament-url?url=${encodeURIComponent(partner.link)}`, {
+                                  headers : {
+                                    Authorization : `Bearer ${import.meta.env.VITE_API_KEY}`
+                                  }
+                                });
+                              } catch (error) {
+                                console.error("Error incrementing URL count:", error);
+                              }                          
                             }
                           }}
                           className="px-4 py-2 text-sm font-semibold
