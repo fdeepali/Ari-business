@@ -38,14 +38,8 @@ export function Footer() {
 
           {/* Social Links */}
           <div className="flex justify-center gap-6 mb-8 text-gray-400">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+            <a href="https://www.linkedin.com/in/rahulv96/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
               <Linkedin size={24} />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
-              <Instagram size={24} />
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
-              <Youtube size={24} />
             </a>
           </div>
 
