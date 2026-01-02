@@ -14,7 +14,6 @@ import {
   CalendarCheck
 } from 'lucide-react';
 
-import partner_image from '../assets/partner_image.webp'; // Bombay Ad Cartel (hidden intentionally)
 import partner2_image from '../assets/adi_logo.png';
 import partner3_image from '../assets/helium10_logo.png';
 import partner4_image from '../assets/payoneer_logo.png';
@@ -22,14 +21,16 @@ import partner5_image from '../assets/HelloLeadsCRM.png';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 
-/* ================= GA4 OUTBOUND TRACKING HELPER =================
-   This ensures outbound link tracking works reliably in React + Vercel
-   Do not remove unless GA4 setup is changed intentionally
-================================================================ */
+/* =====================================================
+   GENERIC OUTBOUND TRACKING (GA4 BEST PRACTICE)
+   Event name : outbound_click
+   Params     : partner_name, link_url, link_domain, source_page
+===================================================== */
 
-const trackOutbound = (eventName, url) => {
+const trackOutbound = ({ partner, url }) => {
   if (window.gtag) {
-    window.gtag('event', eventName, {
+    window.gtag('event', 'outbound_click', {
+      partner_name: partner,
       link_url: url,
       link_domain: new URL(url).hostname,
       source_page: window.location.pathname
@@ -62,15 +63,6 @@ const imageVariants = {
   }
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: 'easeOut' }
-  }
-};
-
 /* ================= COMPONENT ================= */
 
 function About() {
@@ -78,24 +70,16 @@ function About() {
   const navigate = useNavigate();
 
   const handleScrollOrNavigate = sectionId => {
-    const scrollToSection = id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const offset = 80;
-      const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    };
+    const el = document.getElementById(sectionId);
+    if (!el) return;
 
-    if (location.pathname === '/') {
-      scrollToSection(sectionId);
-    } else {
-      navigate('/');
-      setTimeout(() => scrollToSection(sectionId), 200);
-    }
+    const offset = 80;
+    const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
   };
 
   return (
-    <section className="py-5 px-6 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+    <section className="py-5 px-6 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-7xl mx-auto">
 
         {/* ================= HEADER ================= */}
@@ -106,154 +90,107 @@ function About() {
           viewport={{ once: true }}
           variants={containerVariants}
         >
-          <motion.span className="text-yellow-600 font-semibold text-lg mb-4 block" variants={itemVariants}>
-            MEET THE EXPERTS
-          </motion.span>
-
-          <motion.h2 className="text-5xl md:text-6xl font-bold mb-6" variants={itemVariants}>
+          <motion.h2 className="text-5xl font-bold mb-6" variants={itemVariants}>
             Your Amazon Growth Partners
           </motion.h2>
-
-          <motion.p className="text-xl text-gray-600 max-w-3xl mx-auto" variants={itemVariants}>
-            Strategic Amazon consulting backed by real-world execution and global marketplace expertise.
-          </motion.p>
         </motion.div>
 
-        {/* ================= IMAGE BANNER ================= */}
+        {/* ================= IMAGE ================= */}
         <motion.div
-          className="mb-16 rounded-3xl overflow-hidden relative"
+          className="mb-16 rounded-3xl overflow-hidden"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={imageVariants}
         >
-          <img src={about} alt="Amazon Experts" className="w-full h-64 md:h-96 object-cover" />
-          <div className="absolute inset-0 bg-black/40" />
-        </motion.div>
-
-        {/* ================= FOUNDER ================= */}
-        <motion.div
-          className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white p-10 md:p-14 rounded-3xl mb-20 shadow-2xl"
-          variants={cardVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <img src={profile_image} alt="Rahul Vanzara" className="w-56 rounded-2xl border-4 border-yellow-500" />
-
-            <div className="flex-1 text-center lg:text-left">
-              <h3 className="text-4xl font-bold mb-3">Rahul Vanzara</h3>
-              <p className="text-yellow-400 font-semibold mb-4">
-                Amazon FBA & Global E-commerce Specialist
-              </p>
-
-              <div className="flex gap-4 justify-center lg:justify-start">
-                <a href="https://www.instagram.com/ari_business_network/" target="_blank" rel="noopener noreferrer"><Instagram /></a>
-                <a href="https://www.linkedin.com/in/rahulv96" target="_blank" rel="noopener noreferrer"><Linkedin /></a>
-                <a href="mailto:info@aribusinessnetwork.com"><Mail /></a>
-              </div>
-            </div>
-          </div>
+          <img src={about} alt="Amazon Experts" className="w-full h-72 object-cover" />
         </motion.div>
 
         {/* ================= PARTNERS ================= */}
         <motion.div
           className="text-center mb-24"
-          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
+          variants={containerVariants}
         >
-          <motion.h3 className="text-3xl md:text-4xl font-bold mb-12" variants={itemVariants}>
-            Our Strategic Partners
-          </motion.h3>
+          <h3 className="text-3xl font-bold mb-12">Our Strategic Partners</h3>
 
-          {/* ================= Bombay Ad Cartel =================
-              INTENTIONALLY HIDDEN – Business decision
-              Do NOT enable without approval
-          ===================================================== */}
-          {false && (
-            <motion.div className="max-w-md mx-auto mb-16">
-              <img src={partner_image} alt="Bombay Ad Cartel" />
-            </motion.div>
-          )}
+          {/* 🚫 Bombay Ad Cartel intentionally hidden */}
+          {false && <div />}
 
-          {/* ================= SUB PARTNERS GRID ================= */}
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
             {/* ADISOFT */}
-            <div className="bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] p-6 rounded-2xl text-white">
+            <div className="bg-[#0f2027] p-6 rounded-2xl text-white text-center">
               <img src={partner2_image} alt="AdiSoft" className="mx-auto mb-4" />
-              <h4 className="text-xl font-bold mb-2">AdiSoft</h4>
-              <a
-                href="https://www.adisoft.in"
-                target="_blank"
-                rel="noopener noreferrer"
+              <h4 className="font-bold mb-2">AdiSoft</h4>
+              <button
                 className="bg-white text-black px-4 py-2 rounded-lg font-semibold"
-                onClick={() => trackOutbound('adisoft_outbound_click', 'https://www.adisoft.in')}
+                onClick={() =>
+                  trackOutbound({
+                    partner: 'adisoft',
+                    url: 'https://www.adisoft.in'
+                  })
+                }
               >
                 Visit Website
-              </a>
+              </button>
             </div>
 
             {/* HELIUM 10 */}
-            <div className="bg-gradient-to-br from-[#2d3561] via-[#4a5f8f] to-[#6c7eb8] p-6 rounded-2xl text-white">
+            <div className="bg-[#2d3561] p-6 rounded-2xl text-white text-center">
               <img src={partner3_image} alt="Helium 10" className="mx-auto mb-4" />
-              <h4 className="text-xl font-bold mb-2">Helium 10</h4>
-              <a
-                href="https://i.helium10.com/raPZj3"
-                target="_blank"
-                rel="noopener noreferrer"
+              <h4 className="font-bold mb-2">Helium 10</h4>
+              <button
                 className="bg-white text-black px-4 py-2 rounded-lg font-semibold"
-                onClick={() => trackOutbound('helium10_outbound_click', 'https://i.helium10.com/raPZj3')}
+                onClick={() =>
+                  trackOutbound({
+                    partner: 'helium10',
+                    url: 'https://i.helium10.com/raPZj3'
+                  })
+                }
               >
                 Sign Up Now
-              </a>
+              </button>
             </div>
 
             {/* PAYONEER */}
-            <div className="bg-gradient-to-br from-[#e74c3c] via-[#f39c12] to-[#f1c40f] p-6 rounded-2xl text-white">
+            <div className="bg-[#f39c12] p-6 rounded-2xl text-white text-center">
               <img src={partner4_image} alt="Payoneer" className="mx-auto mb-4" />
-              <h4 className="text-xl font-bold mb-2">Payoneer</h4>
-              <a
-                href="https://tracking.payoneer.com/aff_ad"
-                target="_blank"
-                rel="noopener noreferrer"
+              <h4 className="font-bold mb-2">Payoneer</h4>
+              <button
                 className="bg-white text-black px-4 py-2 rounded-lg font-semibold"
-                onClick={() => trackOutbound('payoneer_outbound_click', 'https://tracking.payoneer.com/aff_ad')}
+                onClick={() =>
+                  trackOutbound({
+                    partner: 'payoneer',
+                    url: 'https://tracking.payoneer.com/aff_ad'
+                  })
+                }
               >
                 Get Started
-              </a>
+              </button>
             </div>
 
             {/* HELLOLEADS */}
-            <div className="bg-gradient-to-br from-[#102a43] via-[#243b53] to-[#334e68] p-6 rounded-2xl text-white">
+            <div className="bg-[#243b53] p-6 rounded-2xl text-white text-center">
               <img src={partner5_image} alt="HelloLeads CRM" className="mx-auto mb-4" />
-              <h4 className="text-xl font-bold mb-2">HelloLeads CRM</h4>
-              <a
-                href="https://app.helloleads.io"
-                target="_blank"
-                rel="noopener noreferrer"
+              <h4 className="font-bold mb-2">HelloLeads CRM</h4>
+              <button
                 className="bg-white text-black px-4 py-2 rounded-lg font-semibold"
-                onClick={() => trackOutbound('helloleads_outbound_click', 'https://app.helloleads.io')}
+                onClick={() =>
+                  trackOutbound({
+                    partner: 'helloleads',
+                    url: 'https://app.helloleads.io'
+                  })
+                }
               >
                 Claim Offer
-              </a>
+              </button>
             </div>
 
-          </motion.div>
+          </div>
         </motion.div>
-
-        {/* ================= CTA ================= */}
-        <div className="text-center">
-          <button
-            onClick={() => handleScrollOrNavigate('contact')}
-            className="px-8 py-4 bg-black text-white rounded-xl font-bold"
-          >
-            Contact Rahul
-          </button>
-        </div>
 
       </div>
     </section>
