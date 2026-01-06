@@ -3,6 +3,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import Contact from "./models/Contact.js";
+import QuestionnaireSubmission from "./models/DB_Questionnaire.js";
+import Links from "./models/Links.js";
+import paymentRoute from "./routes/paymentRoute.js";
+import paypalRoute from './routes/paypalRoute.js'
 
 dotenv.config();
 
@@ -18,6 +22,9 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+// Payment controllers
+app.use('/api/payment', paymentRoute);
+app.use('/api/paypal', paypalRoute)
 // ---------------- CONTACT FORM ROUTE (INLINE) ----------------
 app.post("/api/contact-form", async (req, res) => {
   try {
@@ -58,8 +65,6 @@ app.post("/api/contact-form", async (req, res) => {
   }
 });
 
-import QuestionnaireSubmission from "./models/DB_Questionnaire.js";
-import Links from "./models/Links.js";
 // ---------------- QUESTIONNAIRE ROUTE (INLINE) ----------------
 app.post("/api/questionnaire", async (req, res) => {
   try {
@@ -169,7 +174,6 @@ app.get('/api/increament-url', async (req, res) => {
     return res.status(500).json({ success: false });
   }
 });
-
 
 app.get('/api/links', async (req, res) => {
   try {

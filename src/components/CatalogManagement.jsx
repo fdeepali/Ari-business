@@ -92,12 +92,12 @@ function CatalogManagement() {
                 </div>
                 <h3 className="text-2xl font-bold mb-4 text-gray-800">Smart Advertising Optimization</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Turn ad spend into profit with our sophisticated PPC strategies. We leverage advanced targeting, bid optimization, and performance analytics to maximize your return on advertising investment.
+                  Turn ad spend into profit with our sophisticated Sales Growth Campaigns strategies. We leverage advanced targeting, bid optimization, and performance analytics to maximize your return on advertising investment.
                 </p>
                 <ul className="mt-6 space-y-3">
                   <li className="flex items-center text-gray-700">
                     <Check size={18} className="text-yellow-600 mr-2" />
-                    Advanced PPC campaigns
+                    Advanced Sales Growth Campaigns campaigns
                   </li>
                   <li className="flex items-center text-gray-700">
                     <Check size={18} className="text-yellow-600 mr-2" />

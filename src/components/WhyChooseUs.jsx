@@ -99,7 +99,7 @@ function WhyChooseUs() {
       details: [
         "Complete catalog management",
         "Account health monitoring",
-        "Advanced PPC optimization",
+        "Advanced Sales Growth Campaigns optimization",
         "International expansion support"
       ]
     },

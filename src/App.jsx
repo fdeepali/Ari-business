@@ -10,6 +10,7 @@ import BusinessSolutions from './page/BusinessSolutions';
 import QuestionnairePage from './page/QuestionnairePage';
 import QuestionnairePageNew from './page/QuestionnairePageNew';
 import { pageview } from './utils/gtag';
+import QuestionnaireSubmission from './page/QuestionnaireSubmission';
 
 function App() {
   const location = useLocation();
@@ -30,7 +31,7 @@ function App() {
         <Route path='/services' element={<ServicePage />} />
         <Route path='/about-rahul' element={<AboutRahul />} />
         <Route path='/business-solutions' element={<BusinessSolutions />} />
-        <Route path='/book-appointment' element={<QuestionnairePageNew />} />
+        <Route path='/book-appointment' element={<QuestionnaireSubmission />} />
       </Routes>
       <Footer />
     </>
