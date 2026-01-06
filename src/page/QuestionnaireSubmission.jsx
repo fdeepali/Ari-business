@@ -80,187 +80,187 @@ function QuestionnaireSubmission() {
       type: 'single',
       options: ['Trader', 'Manufacturer', 'Both']
     },
-    // {
-    //   id: 'objective',
-    //   question: 'Are you:',
-    //   type: 'single',
-    //   options: [
-    //     'New to Amazon and want to start selling',
-    //     'Already selling on Amazon and need support',
-    //     'Both (new region + existing account issues)'
-    //   ]
-    // },
-    // {
-    //   id: 'targetRegions',
-    //   question: 'Which Amazon regions are you interested in?',
-    //   type: 'multiple',
-    //   options: [
-    //     'India (IN)',
-    //     'USA (US)',
-    //     'UK',
-    //     'EU',
-    //     'Canada (CA)',
-    //     'UAE (AE)',
-    //     'Australia (AU)',
-    //     'Others'
-    //   ],
-    //   hasOther: true
-    // },
-    // {
-    //   id: 'hasAmazonAccount',
-    //   question: 'Do you already have an Amazon seller account?',
-    //   type: 'single',
-    //   options: ['Yes', 'No']
-    // },
-    // {
-    //   id: 'accountStatus',
-    //   question: 'If yes, what is your account status?',
-    //   type: 'single',
-    //   options: ['Active', 'Deactivated', 'Suspended', 'N/A']
-    // },
-    // {
-    //   id: 'productCategory',
-    //   question: 'What is your primary product category?',
-    //   type: 'single',
-    //   options: [
-    //     'Apparel & Fashion',
-    //     'Electronics',
-    //     'Food & Beverages',
-    //     'Home & Kitchen',
-    //     'Beauty & Personal Care',
-    //     'Health & Wellness',
-    //     'Industrial Supplies',
-    //     'Handicrafts',
-    //     'Others'
-    //   ],
-    //   hasOther: true
-    // },
-    // {
-    //   id: 'productSource',
-    //   question: 'Are your products:',
-    //   type: 'single',
-    //   options: [
-    //     'Own manufactured items',
-    //     'Private label / White label',
-    //     'Trading / Reselling branded goods'
-    //   ]
-    // },
-    // {
-    //   id: 'hasTrademark',
-    //   question: 'Do you have a registered trademark?',
-    //   type: 'single',
-    //   options: [
-    //     'Yes - registered',
-    //     'Application filed but not yet registered',
-    //     'No, but want help filing',
-    //     'No'
-    //   ]
-    // },
-    // {
-    //   id: 'hasBrandRegistry',
-    //   question: 'Do you have Brand Registry on any Amazon marketplace?',
-    //   type: 'single',
-    //   options: ['Yes', 'No']
-    // },
-    // {
-    //   id: 'restrictedProducts',
-    //   question:
-    //     'Do your products fall under restricted or sensitive categories (health supplements, cosmetics, food, baby products, electronics, batteries, etc.)?',
-    //   type: 'single',
-    //   options: ['Yes', 'No', 'Not sure']
-    // },
-    // {
-    //   id: 'certifications',
-    //   question:
-    //     'Do your products require mandatory certifications (FSSAI, BIS, FDA, CE, FCC, etc.)?',
-    //   type: 'single',
-    //   options: [
-    //     'Yes - already have all required',
-    //     'Yes - have some, need others',
-    //     'Yes - need all certifications',
-    //     'No certifications required',
-    //     'Not sure'
-    //   ]
-    // },
-    // {
-    //   id: 'fulfillmentModel',
-    //   question: 'Do you plan to use:',
-    //   type: 'single',
-    //   options: [
-    //     'FBA (Fulfillment by Amazon)',
-    //     'FBM (Self-ship)',
-    //     'Both (depends on SKU)',
-    //     'Not decided yet'
-    //   ]
-    // },
-    // {
-    //   id: 'hasProductPhotography',
-    //   question: 'Do you have product photography?',
-    //   type: 'single',
-    //   options: ['Yes - studio quality', 'Yes - basic quality', 'No - need support']
-    // },
-    // {
-    //   id: 'hasListingContent',
-    //   question:
-    //     'Do you have existing product listings (titles, descriptions, bullet points)?',
-    //   type: 'single',
-    //   options: ['Yes', 'Partially', 'No']
-    // },
-    // {
-    //   id: 'ppcExperience',
-    //   question: 'Have you previously run Amazon Sales Growth Campaigns campaigns?',
-    //   type: 'single',
-    //   options: ['Yes - self-managed', 'Yes - via agency', 'No']
-    // },
-    // {
-    //   id: 'servicesNeeded',
-    //   question: 'What specific help are you looking for? (Select all that apply)',
-    //   type: 'multiple',
-    //   options: [
-    //     'New account registration and setup',
-    //     'Product research',
-    //     'Listing creation & optimization',
-    //     'Brand building (A+ content, Storefront)',
-    //     'Sales Growth Campaigns/Ads and marketing',
-    //     'Inventory / FBA / logistics setup',
-    //     'Compliance, documentation, and taxation',
-    //     'Account health / suspension / appeal',
-    //     'Other'
-    //   ],
-    //   hasOther: true
-    // },
-    // {
-    //   id: 'monthlyBudget',
-    //   question: 'What is your approximate monthly budget for Amazon services?',
-    //   type: 'single',
-    //   options: [
-    //     '₹10,000 - ₹25,000',
-    //     '₹25,000 - ₹50,000',
-    //     '₹50,000 - ₹1,00,000',
-    //     'Above ₹1,00,000',
-    //     'Not decided yet'
-    //   ]
-    // },
-    // {
-    //   id: 'timeline',
-    //   question: 'How soon are you looking to start?',
-    //   type: 'single',
-    //   options: ['Immediately', 'Within 2 weeks', 'Within 1-3 months', 'Just exploring options']
-    // },
-    // {
-    //   id: 'mainObjective',
-    //   question: 'What is your main objective in the next 6-12 months?',
-    //   type: 'single',
-    //   options: [
-    //     'Launch new products',
-    //     'Scale revenue on existing products',
-    //     'Expand to new regions',
-    //     'Fix compliance or account issues',
-    //     'Build brand presence',
-    //     'Other'
-    //   ],
-    //   hasOther: true
-    // }
+    {
+      id: 'objective',
+      question: 'Are you:',
+      type: 'single',
+      options: [
+        'New to Amazon and want to start selling',
+        'Already selling on Amazon and need support',
+        'Both (new region + existing account issues)'
+      ]
+    },
+    {
+      id: 'targetRegions',
+      question: 'Which Amazon regions are you interested in?',
+      type: 'multiple',
+      options: [
+        'India (IN)',
+        'USA (US)',
+        'UK',
+        'EU',
+        'Canada (CA)',
+        'UAE (AE)',
+        'Australia (AU)',
+        'Others'
+      ],
+      hasOther: true
+    },
+    {
+      id: 'hasAmazonAccount',
+      question: 'Do you already have an Amazon seller account?',
+      type: 'single',
+      options: ['Yes', 'No']
+    },
+    {
+      id: 'accountStatus',
+      question: 'If yes, what is your account status?',
+      type: 'single',
+      options: ['Active', 'Deactivated', 'Suspended', 'N/A']
+    },
+    {
+      id: 'productCategory',
+      question: 'What is your primary product category?',
+      type: 'single',
+      options: [
+        'Apparel & Fashion',
+        'Electronics',
+        'Food & Beverages',
+        'Home & Kitchen',
+        'Beauty & Personal Care',
+        'Health & Wellness',
+        'Industrial Supplies',
+        'Handicrafts',
+        'Others'
+      ],
+      hasOther: true
+    },
+    {
+      id: 'productSource',
+      question: 'Are your products:',
+      type: 'single',
+      options: [
+        'Own manufactured items',
+        'Private label / White label',
+        'Trading / Reselling branded goods'
+      ]
+    },
+    {
+      id: 'hasTrademark',
+      question: 'Do you have a registered trademark?',
+      type: 'single',
+      options: [
+        'Yes - registered',
+        'Application filed but not yet registered',
+        'No, but want help filing',
+        'No'
+      ]
+    },
+    {
+      id: 'hasBrandRegistry',
+      question: 'Do you have Brand Registry on any Amazon marketplace?',
+      type: 'single',
+      options: ['Yes', 'No']
+    },
+    {
+      id: 'restrictedProducts',
+      question:
+        'Do your products fall under restricted or sensitive categories (health supplements, cosmetics, food, baby products, electronics, batteries, etc.)?',
+      type: 'single',
+      options: ['Yes', 'No', 'Not sure']
+    },
+    {
+      id: 'certifications',
+      question:
+        'Do your products require mandatory certifications (FSSAI, BIS, FDA, CE, FCC, etc.)?',
+      type: 'single',
+      options: [
+        'Yes - already have all required',
+        'Yes - have some, need others',
+        'Yes - need all certifications',
+        'No certifications required',
+        'Not sure'
+      ]
+    },
+    {
+      id: 'fulfillmentModel',
+      question: 'Do you plan to use:',
+      type: 'single',
+      options: [
+        'FBA (Fulfillment by Amazon)',
+        'FBM (Self-ship)',
+        'Both (depends on SKU)',
+        'Not decided yet'
+      ]
+    },
+    {
+      id: 'hasProductPhotography',
+      question: 'Do you have product photography?',
+      type: 'single',
+      options: ['Yes - studio quality', 'Yes - basic quality', 'No - need support']
+    },
+    {
+      id: 'hasListingContent',
+      question:
+        'Do you have existing product listings (titles, descriptions, bullet points)?',
+      type: 'single',
+      options: ['Yes', 'Partially', 'No']
+    },
+    {
+      id: 'ppcExperience',
+      question: 'Have you previously run Amazon Sales Growth Campaigns campaigns?',
+      type: 'single',
+      options: ['Yes - self-managed', 'Yes - via agency', 'No']
+    },
+    {
+      id: 'servicesNeeded',
+      question: 'What specific help are you looking for? (Select all that apply)',
+      type: 'multiple',
+      options: [
+        'New account registration and setup',
+        'Product research',
+        'Listing creation & optimization',
+        'Brand building (A+ content, Storefront)',
+        'Sales Growth Campaigns/Ads and marketing',
+        'Inventory / FBA / logistics setup',
+        'Compliance, documentation, and taxation',
+        'Account health / suspension / appeal',
+        'Other'
+      ],
+      hasOther: true
+    },
+    {
+      id: 'monthlyBudget',
+      question: 'What is your approximate monthly budget for Amazon services?',
+      type: 'single',
+      options: [
+        '₹10,000 - ₹25,000',
+        '₹25,000 - ₹50,000',
+        '₹50,000 - ₹1,00,000',
+        'Above ₹1,00,000',
+        'Not decided yet'
+      ]
+    },
+    {
+      id: 'timeline',
+      question: 'How soon are you looking to start?',
+      type: 'single',
+      options: ['Immediately', 'Within 2 weeks', 'Within 1-3 months', 'Just exploring options']
+    },
+    {
+      id: 'mainObjective',
+      question: 'What is your main objective in the next 6-12 months?',
+      type: 'single',
+      options: [
+        'Launch new products',
+        'Scale revenue on existing products',
+        'Expand to new regions',
+        'Fix compliance or account issues',
+        'Build brand presence',
+        'Other'
+      ],
+      hasOther: true
+    }
   ];
 
   const contactFields = [
