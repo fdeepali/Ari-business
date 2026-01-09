@@ -198,8 +198,18 @@ function About() {
 
             {/* ADISOFT */}
             <div className="bg-[#0f2027] p-6 rounded-2xl text-white text-center">
-              <img src={partner2_image} alt="AdiSoft" className="mx-auto mb-4" />
+              
+              {/* Image container with white background */}
+              <div className="bg-white rounded-xl p-3 h-50 w-[97%] flex items-center justify-center mb-4">
+                <img 
+                  src={partner2_image} 
+                  alt="AdiSoft" 
+                  className="mx-auto h-16 object-contain"
+                />
+              </div>
+
               <h4 className="font-bold mb-3">AdiSoft</h4>
+
               <a
                 href="https://www.adisoft.in"
                 target="_blank"
@@ -211,12 +221,23 @@ function About() {
               >
                 Visit Website
               </a>
+
             </div>
 
             {/* HELIUM 10 */}
             <div className="bg-[#2d3561] p-6 rounded-2xl text-white text-center">
-              <img src={partner3_image} alt="Helium 10" className="mx-auto mb-4" />
+  
+              {/* Image container with white background */}
+              <div className="bg-white rounded-xl p-3 flex justify-center items-center h-50 mb-4">
+                <img 
+                  src={partner3_image} 
+                  alt="Helium 10" 
+                  className="mx-auto h-16 object-contain"
+                />
+              </div>
+
               <h4 className="font-bold mb-3">Helium 10</h4>
+
               <a
                 href="https://i.helium10.com/raPZj3"
                 target="_blank"
@@ -228,12 +249,23 @@ function About() {
               >
                 Sign Up Now
               </a>
+
             </div>
 
             {/* PAYONEER */}
             <div className="bg-[#f39c12] p-6 rounded-2xl text-white text-center">
-              <img src={partner4_image} alt="Payoneer" className="mx-auto mb-4" />
+              
+              {/* Image container with white background */}
+              <div className="bg-white rounded-xl p-3 flex justify-center items-center h-50 mb-4">
+                <img 
+                  src={partner4_image} 
+                  alt="Payoneer" 
+                  className="mx-auto h-16 object-contain"
+                />
+              </div>
+
               <h4 className="font-bold mb-3">Payoneer</h4>
+
               <a
                 href="https://tracking.payoneer.com/aff_ad"
                 target="_blank"
@@ -245,12 +277,23 @@ function About() {
               >
                 Get Started
               </a>
+
             </div>
 
             {/* HELLOLEADS */}
             <div className="bg-[#243b53] p-6 rounded-2xl text-white text-center">
-              <img src={partner5_image} alt="HelloLeads CRM" className="mx-auto mb-4" />
+  
+              {/* Image container with white background */}
+              <div className="bg-white rounded-xl p-3 flex items-center h-50 justify-center mb-4">
+                <img 
+                  src={partner5_image} 
+                  alt="HelloLeads CRM" 
+                  className="mx-auto h-16 object-contain"
+                />
+              </div>
+
               <h4 className="font-bold mb-3">HelloLeads CRM</h4>
+
               <a
                 href="https://app.helloleads.io"
                 target="_blank"
@@ -262,6 +305,7 @@ function About() {
               >
                 Claim Offer
               </a>
+
             </div>
 
           </div>
