@@ -267,12 +267,12 @@ function About() {
               <h4 className="font-bold mb-3">Payoneer</h4>
 
               <a
-                href="https://tracking.payoneer.com/aff_ad"
+                href="https://paynr.co/49QbRtF"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white text-black px-4 py-2 rounded-lg font-semibold inline-block"
                 onClick={() =>
-                  trackOutbound({ partner: 'payoneer', url: 'https://tracking.payoneer.com/aff_ad' })
+                  trackOutbound({ partner: 'payoneer', url: 'https://paynr.co/49QbRtF' })
                 }
               >
                 Get Started
