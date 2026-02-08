@@ -136,45 +136,57 @@ function About() {
         </motion.div>
 
         {/* ================= FOUNDER ================= */}
-        <motion.div
-          className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white p-10 md:p-14 rounded-3xl mb-20 shadow-2xl"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={itemVariants}
+<motion.div
+  className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white p-10 md:p-14 rounded-3xl mb-20 shadow-2xl"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={itemVariants}
+>
+  <div className="flex flex-col lg:flex-row items-center gap-12">
+    <img
+      src={profile_image}
+      alt="Rahul Vanzara"
+      className="w-56 rounded-2xl border-4 border-yellow-500 shadow-xl"
+    />
+
+    <div className="flex-1 text-center lg:text-left">
+      <h3 className="text-4xl font-bold mb-3">Rahul Vanzara</h3>
+      <p className="text-yellow-400 font-semibold mb-4">
+        Amazon FBA & Global E-commerce Specialist
+      </p>
+
+      <p className="text-gray-300 mb-6">
+        Helping brands scale profitably on Amazon through
+        data-driven strategies, compliance, and global expansion.
+      </p>
+
+      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4">
+        {/* Social Icons */}
+        <div className="flex gap-4 justify-center lg:justify-start">
+          <a href="https://www.instagram.com/ari_business_network/" target="_blank" rel="noopener noreferrer">
+            <Instagram />
+          </a>
+          <a href="https://www.linkedin.com/in/rahulv96" target="_blank" rel="noopener noreferrer">
+            <Linkedin />
+          </a>
+          <a href="mailto:info@aribusinessnetwork.com">
+            <Mail />
+          </a>
+        </div>
+
+        {/* Golden Button */}
+        <a
+          href="/about-rahul"
+          className="px-6 py-2 rounded-full bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black font-semibold shadow-lg hover:shadow-yellow-500/40 hover:scale-105 transition-all duration-300"
         >
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <img
-              src={profile_image}
-              alt="Rahul Vanzara"
-              className="w-56 rounded-2xl border-4 border-yellow-500 shadow-xl"
-            />
+          View About Rahul
+        </a>
+      </div>
+    </div>
+  </div>
+</motion.div>
 
-            <div className="flex-1 text-center lg:text-left">
-              <h3 className="text-4xl font-bold mb-3">Rahul Vanzara</h3>
-              <p className="text-yellow-400 font-semibold mb-4">
-                Amazon FBA & Global E-commerce Specialist
-              </p>
-
-              <p className="text-gray-300 mb-6">
-                Helping brands scale profitably on Amazon through
-                data-driven strategies, compliance, and global expansion.
-              </p>
-
-              <div className="flex gap-4 justify-center lg:justify-start">
-                <a href="https://www.instagram.com/ari_business_network/" target="_blank" rel="noopener noreferrer">
-                  <Instagram />
-                </a>
-                <a href="https://www.linkedin.com/in/rahulv96" target="_blank" rel="noopener noreferrer">
-                  <Linkedin />
-                </a>
-                <a href="mailto:info@aribusinessnetwork.com">
-                  <Mail />
-                </a>
-              </div>
-            </div>
-          </div>
-        </motion.div>
 
         {/* ================= PARTNERS ================= */}
         <motion.div
