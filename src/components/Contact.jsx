@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, FileText, MessageCircle, Send, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, FileText, MessageCircle, Send } from 'lucide-react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import emailjs from '@emailjs/browser';
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 function Contact() {
   const [loading, setLoading] = useState(false);
@@ -9,65 +12,48 @@ function Contact() {
   const onSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    
-    try {
-      const form = event.target;
 
-      const payload = {
-        name: form.name.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        storeUrl: form.storeUrl.value,
-        goals: form.goals.value,
+    const form = event.target;
+    const payload = {
+      name: form.name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      storeUrl: form.storeUrl.value,
+      goals: form.goals.value,
+    };
+
+    try {
+      // 1. Save to backend DB
+      const backendResponse = await fetch(`${BACKEND_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const backendData = await backendResponse.json();
+      if (!backendData.success) throw new Error(backendData.message || 'Backend save failed');
+
+      // 2. Send email via EmailJS (one template sends to both admin & user via CC/BCC or two sends)
+      const templateParams = {
+        from_name: payload.name,
+        from_email: payload.email,
+        phone: payload.phone,
+        store_url: payload.storeUrl || 'N/A',
+        goals: payload.goals,
+        to_email: 'sanketbelekar270306@gmail.com', // admin email
+        reply_to: payload.email,
       };
 
-      console.log("Submitting contact form with payload:", payload);
-
-      const backendResponse = await fetch(
-        "https://ari-business-network-3.onrender.com/api/contact-form",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_CONTACT_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
-      const backendData = await backendResponse.json();
-
-      if (!backendData.success) {
-        throw new Error(backendData.message || "Backend save failed");
-      }
-
-      // 2. THEN: Send Email via Web3Forms
-      const emailFormData = new FormData(event.target);
-      emailFormData.append("access_key", "fcac1743-0e41-404a-bba1-70105e78370b");
-      emailFormData.append("subject", "New Contact Form Submission");
-
-      const emailResponse = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: emailFormData
-      });
-      const emailData = await emailResponse.json();
-
-      if (!emailData.success) {
-        console.log("Email failed but data saved to DB:", emailData);
-        toast.warning("Email delivery failed. We'll contact you soon!", {
-          position: "top-center",
-        });
-      } else {
-        toast.success("Your message has been sent! We'll contact you shortly.", {
-          position: "top-center",
-        });
-      }
-
-      event.target.reset();
-      
+      toast.success("Your message has been sent! We'll contact you shortly.", { position: 'top-center' });
+      form.reset();
     } catch (err) {
-      toast.error(err.message || "Failed to send message. Please try again.", {
-        position: "top-center",
-      });
+      toast.error(err.message || 'Failed to send message. Please try again.', { position: 'top-center' });
       console.error(err);
     } finally {
       setLoading(false);
